@@ -24,7 +24,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
       <meta-data
         android:name="com.naver.maps.map.CLIENT_ID"
-        android:value="cxkwnesizt"/>
+        android:value="API_KEY"/>
     </application>
 
 </manifest>

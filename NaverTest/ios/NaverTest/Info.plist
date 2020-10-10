@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NMFClientId</key>
-	<string>cxkwnesizt</string>
+	<string>API_KEY</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
