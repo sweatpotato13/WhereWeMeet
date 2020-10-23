@@ -40,6 +40,10 @@ const MapViewScreen = ({navigation}) => {
                       onCameraChange={e => console.warn('onCameraChange', JSON.stringify(e))}
                       onMapClick={e => console.warn('onMapClick', JSON.stringify(e))}
                       useTextureView>
+            <Marker 
+                coordinate={{latitude: 37.5665, longitude: 126.97905}}
+                title='this is marker'
+                description='this is a marker example' />
         </NaverMapView>
         <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}} onPress={() => navigation.navigate('stack')}>
             <View style={{backgroundColor: 'gray', padding: 4}}>
