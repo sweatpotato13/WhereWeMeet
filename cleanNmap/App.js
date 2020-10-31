@@ -34,17 +34,24 @@ const HomeScreen = () =>
 
 const TextScreen = () => <Text>text</Text>
 
-const makeMarker = (latitude, longitude) => 
-  <Marker coordinate={{latitude, longitude}}
-          title='해당 영역의 주소'
-          description='장소 세부 정보'/>
-
 const MapViewScreen = ({navigation}) => {
   useEffect(() => {
     requestLocationPermission();
   }, []);
 
   const [locaInfo, setLocaInfo] = useState({latitude: 37.5665, longitude: 126.87905});
+  // const [flag, setFlage] = useState(false);
+
+  const makeMarker = (latitude, longitude) => {
+    return (<Marker coordinate={{latitude, longitude}}
+            title='해당 영역의 주소'
+            description='장소 세부 정보'
+            onClick= {() => {
+              console.warn(`marker clicked`);
+              setFlage(!flag);
+            }}
+    />);
+  }
 
   return (
     <>
@@ -58,6 +65,7 @@ const MapViewScreen = ({navigation}) => {
                     }}
                     useTextureView>
         {makeMarker(locaInfo.latitude, locaInfo.longitude)}
+        {/* {flag ? <Text style={{position: 'absolute', bottom: '20%', right: 8}}>test</Text> : <></>} */}
       </NaverMapView>
       <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}}
                         onPress={() => navigation.navigate('stack')}>
