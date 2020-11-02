@@ -21,6 +21,7 @@ const App = () => {
   return <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen name='home' component={HomeScreen}/>
+      {/* TODO :: 이 사이에 무언가 마커에 대한 정보를 제공하기 위한 tab이 제공되어야 할 것 같다. flag 조건에 따라? 아이디어는 생각 중 */}
       <Stack.Screen name='stack' component={MapViewScreen}/>
     </Stack.Navigator>
   </NavigationContainer>
@@ -29,7 +30,7 @@ const App = () => {
 const HomeScreen = () =>
   <Tab.Navigator>
     <Tab.Screen name={'map'} component={MapViewScreen}/>
-    <Tab.Screen name={'text'} component={TextScreen}/>
+    <Tab.Screen name={'text'} component={TextScreen}/> {/* CHECK :: 이 탭의 용도는? */}
   </Tab.Navigator>
 
 const TextScreen = () => <Text>text</Text>
@@ -48,7 +49,7 @@ const MapViewScreen = ({navigation}) => {
             description='장소 세부 정보'
             onClick= {() => {
               console.warn(`marker clicked`);
-              setFlage(!flag);
+              // setFlage(!flag);
             }}
     />);
   }
