@@ -3,7 +3,7 @@ import NaverMapView, { Marker } from './map';
 import { StyleSheet, PermissionsAndroid, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 /* TODO ~ 20201114
-    1. style 전부 따로 빼서 정리 -> 변수 형태로 작성
+    1. --style 전부 따로 빼서 정리 -> 변수 형태로 작성--
     2. 검색을 위한 floating 버튼 위치 조정...! 컴포넌트 위치 어떻게 하냐!
     3. 검색 floating button을 눌렀을 때 검색창이 뜨도록 -> 검색창 style도 지정! css
 */ 
@@ -32,7 +32,7 @@ const MapViewScreen = ({navigation}) => {
 
   return (
     <>
-      <NaverMapView style={{width: '100%', height: '100%'}}
+      <NaverMapView style={styles.naverMapViewStyle}
                     showsMyLocationButton={true}
                     onTouch = {e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
                     onCameraChange = {e => console.warn('onCameraChange', JSON.stringify(e))}
@@ -44,13 +44,8 @@ const MapViewScreen = ({navigation}) => {
         {makeMarker(locaInfo.latitude, locaInfo.longitude)}
         {/* {flag ? <Text style={{position: 'absolute', bottom: '20%', right: 8}}>test</Text> : <></>} */}
       </NaverMapView>
-      {/* TouchableOpacity : 눌렀을 때 피드백을 주는 버튼
-      Button : 안드로이드와 iOS에서 다르게 보이는 문제 */}
-      <TouchableOpacity style={{position: 'absolute', bottom: '10%', right: 8}}
+      <TouchableOpacity style={styles.touchableOpacityStyle}
                         onPress={() => navigation.navigate('stack')}>
-        {/* <View style={{backgroundColor: 'gray', padding: 4}}>
-          <Text style={{color: 'white'}}>open stack</Text>
-        </View> */}
         <View>
           <Text onPress={() => console.warn('hello')}>Hello</Text>
         </View>
@@ -83,6 +78,15 @@ const requestLocationPermission = async () => {
 }
 
 const styles = StyleSheet.create({
+  naverMapViewStyle: {
+    width: '100%',
+    height: '100%'
+  },
+  touchableOpacityStyle: {
+    position: 'absolute',
+    bottom: '10%',
+    right: 8
+  },
   floatingButtonStyle: {
     position: 'absolute',
     top: '30%',
