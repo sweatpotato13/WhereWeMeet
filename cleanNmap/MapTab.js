@@ -3,9 +3,9 @@ import NaverMapView, { Marker } from './map';
 import { StyleSheet, PermissionsAndroid, Platform, Text, TouchableOpacity, View } from 'react-native';
 
 /* TODO ~ 20201114
-    1. --style 전부 따로 빼서 정리 -> 변수 형태로 작성--
-    2. 검색을 위한 floating 버튼 위치 조정...! 컴포넌트 위치 어떻게 하냐!
-    3. 검색 floating button을 눌렀을 때 검색창이 뜨도록 -> 검색창 style도 지정! css
+    1. 검색 floating button을 눌렀을 때 검색창이 뜨도록 -> 검색창 style도 지정! css
+      1.1. searchBar design
+      1.2. searchActivate button 이미지 파일
 */ 
 
 const MapViewScreen = ({navigation}) => {
@@ -15,7 +15,7 @@ const MapViewScreen = ({navigation}) => {
   }, []);
 
   const [locaInfo, setLocaInfo] = useState({latitude: 37.5665, longitude: 126.87905});
-  // const [flag, setFlage] = useState(false);
+  const [searchFlag, setSearchFlag] = useState(false); // module 분리 시 state는 어떻게,,,?
 
   // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
   // https://yannichoongs.tistory.com/163 -> 참고해서 작성
@@ -28,6 +28,40 @@ const MapViewScreen = ({navigation}) => {
               // setFlage(!flag);
             }}
     />);
+  }
+
+  const searchActivateButton = () => {
+    return (
+      <TouchableOpacity style={styles.touchableOpacityStyle}
+                        onPress={() => navigation.navigate('stack')}>
+        <View>
+          <Text style={styles.floatingButtonStyle}
+                onPress={() => {
+                  setSearchFlag(!searchFlag);
+                  console.warn('searchBar activate');
+                }}>
+            Search
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  const searchBar = () => {
+    return (
+      <TouchableOpacity style={styles.touchableOpacityStyle}
+                        onPress={() => navigation.navigate('stack')}>
+        <View>
+          <Text style={styles.floatingButtonStyle}
+                onPress={() => {
+                  setSearchFlag(!searchFlag);
+                  console.warn('searchBar deactivate');
+                }}>          
+            SearchBar
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
   }
 
   return (
@@ -44,12 +78,7 @@ const MapViewScreen = ({navigation}) => {
         {makeMarker(locaInfo.latitude, locaInfo.longitude)}
         {/* {flag ? <Text style={{position: 'absolute', bottom: '20%', right: 8}}>test</Text> : <></>} */}
       </NaverMapView>
-      <TouchableOpacity style={styles.touchableOpacityStyle}
-                        onPress={() => navigation.navigate('stack')}>
-        <View>
-          <Text onPress={() => console.warn('hello')}>Hello</Text>
-        </View>
-      </TouchableOpacity>
+      {!searchFlag ? searchActivateButton() : searchBar()}
     </>
   );
 }
@@ -84,14 +113,13 @@ const styles = StyleSheet.create({
   },
   touchableOpacityStyle: {
     position: 'absolute',
-    bottom: '10%',
-    right: 8
+    top: '4%',
+    right: '4%', // 단위가 생략되어 있다.
   },
   floatingButtonStyle: {
-    position: 'absolute',
-    top: '30%',
-    left: 10,
-    resizeMode: 'contain',
+    color: 'white',
+    backgroundColor: 'gray',
+    textAlign: 'center',
     width: 50,
     height: 50,
   }
