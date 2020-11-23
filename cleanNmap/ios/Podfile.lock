@@ -310,7 +310,7 @@ PODS:
     - React
   - RNReanimated (1.13.1):
     - React
-  - RNScreens (2.12.0):
+  - RNScreens (2.14.0):
     - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -486,7 +486,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 8e68ffbfe23880d3ee9bafa8be2777f60b25cbe2
   react-native-geolocation-service: 141e33bdb179bcba10b216ee13962611e21f2be4
   react-native-nmap: 5d572d0318d0cecdc711e319b896604db349c880
-  react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
+  react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   React-RCTActionSheet: 53ea72699698b0b47a6421cb1c8b4ab215a774aa
   React-RCTAnimation: 1befece0b5183c22ae01b966f5583f42e69a83c2
   React-RCTBlob: 0b284339cbe4b15705a05e2313a51c6d8b51fa40
@@ -497,13 +497,13 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
+  RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476
-  RNScreens: 4b488fdf9537bbce829e2910c8cce1d17f6d9be8
+  RNScreens: 2e278a90eb15092ed261d4f2271e3fc9b60d08d4
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: a6c6e3fe881eeedc0984b8df0703c7ed201c0298
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.9.3
