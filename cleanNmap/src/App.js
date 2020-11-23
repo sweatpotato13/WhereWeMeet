@@ -19,18 +19,21 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const App = () => {
-  return <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name='home' component={HomeScreen}/>
-      <Stack.Screen name='stack' component={MapViewScreen}/>
-    </Stack.Navigator>
-  </NavigationContainer>
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="home" component={HomeScreen} />
+                <Stack.Screen name="stack" component={MapViewScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 };
 
-const HomeScreen = () =>
-  <Tab.Navigator>
-    <Tab.Screen name={'map'} component={MapViewScreen}/>
-    <Tab.Screen name={'text'} component={TextScreen}/>
-  </Tab.Navigator>
+const HomeScreen = () => (
+    <Tab.Navigator>
+        <Tab.Screen name={"map"} component={MapViewScreen} />
+        <Tab.Screen name={"text"} component={TextScreen} />
+    </Tab.Navigator>
+);
 
 export default App;
