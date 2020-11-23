@@ -7,13 +7,13 @@
  */
 
 // import 'react-native-gesture-handler';
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import TextScreen from "./TextTab";
-import MapViewScreen from "./MapTab";
+import TextScreen from './TextTab';
+import MapViewScreen from './MapTab';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
