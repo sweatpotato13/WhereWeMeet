@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import NaverMapView, { Marker } from './map';
 import { TextInput, StyleSheet, PermissionsAndroid, Platform, Text, TouchableOpacity, View } from 'react-native';
 
+import { getGeoObj } from './common/geo';
+
 /* TODO ::
     1. Design : 검색 floating button을 눌렀을 때 검색창이 뜨도록
       1.1. --searchBar design--
@@ -17,6 +19,7 @@ const MapViewScreen = ({navigation}) => {
 
   const [locaInfo, setLocaInfo] = useState({latitude: 37.5665, longitude: 126.87905});
   const [searchFlag, setSearchFlag] = useState(false); // module 분리 시 state는 어떻게,,,?
+  const [addrInfo, setAddrInfo] = useState('');
 
   // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
   // https://yannichoongs.tistory.com/163 -> 참고해서 작성
@@ -53,11 +56,18 @@ const MapViewScreen = ({navigation}) => {
   const searchBar = () => {
     return (
       <TextInput style={styles.searchBarStyle}
-                placeholder={"지번, 도로명 주소 입력"}
-                onSubmitEditing={() => {
-                    setSearchFlag(!setSearchFlag);
-                    console.warn('searchBar deactivate');
-                }}
+                 placeholder={"지번, 도로명 주소 입력"}
+                 onSubmitEditing={async () => {
+                    //  setSearchFlag(!setSearchFlag);
+                    const result = await getGeoObj(addrInfo);
+                    const addr = result['addresses'][0]['x'];
+                     console.warn(`${addr}`);
+                    //  console.warn(`${addrInfo} searchBar deactivate`);
+                 }}
+                 onChangeText={(text) => {
+                   setAddrInfo(text);
+                  //  console.warn(addrInfo);
+                 }}
       />
     );
   }
