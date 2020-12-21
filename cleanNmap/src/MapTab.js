@@ -6,11 +6,12 @@ import { getGeoObj } from './common/geo';
 
 /* TODO ::
     1. Design : 검색 floating button을 눌렀을 때 검색창이 뜨도록
-      1.1. --searchBar design--
-      1.2. searchActivate button 이미지 파일
-    2. Function : 기능 검색
-      2.1. geo -> x, y좌표로 이동, 마커 찍기, 해당 좌표 세부 정보창 만들기
-      2.2. reverseGeo -> 마커만 찍을 경우 세부 정보창 만들기
+      1.2. searchActivate button 이미지 파일(.svg)
+    2. Function : 기능 수행
+      2.1. geo
+        2.1.1. ~~마커 찍기~~
+        2.1.2. 마커 좌표로 이동시키기
+        2.1.3. 해당 좌표의 세부 정보를 보여주는 창 만들기
 */ 
 
 const MapViewScreen = ({navigation}) => {
@@ -31,7 +32,7 @@ const MapViewScreen = ({navigation}) => {
         title='해당 영역의 주소'
         description='장소 세부 정보'
         onClick= {() => {
-          console.warn(`marker clicked`);
+          console.warn(`${longitutde}, ${latitude} marker clicked`);
           // setFlage(!flag);
         }
       }/>
@@ -60,10 +61,12 @@ const MapViewScreen = ({navigation}) => {
       <TextInput style={styles.searchBarStyle}
                  placeholder={"지번, 도로명 주소 입력"}
                  onSubmitEditing={async () => {
-                    //  setSearchFlag(!setSearchFlag);
+                    //  setSearchFlag(!setSearchFlag); 축소시키는 기능도 필요하지 않을까?
                     const result = await getGeoObj(addrInfo);
-                    const addr = result['addresses'][0]['x'];
-                     console.warn(`${addr}`);
+                    const addr_x = result['addresses'][0]['x'];
+                    const addr_y = result['addresses'][0]['y'];
+                    console.warn(`${addr_x}, ${addr_y}`);
+                    makeMarker(addr_y, addr_x);
                     //  console.warn(`${addrInfo} searchBar deactivate`);
                  }}
                  onChangeText={(text) => {
