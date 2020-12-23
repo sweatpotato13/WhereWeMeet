@@ -2,10 +2,10 @@
 
 ## Geo Url results
 ```json
-{"addresses": 
+{"addresses": // 유사한 주소를 갖고 있는 여러 선택지들이 저장된다.
   [
     {
-      "addressElements": [Array],
+      "addressElements": [Array], 
       "distance": 0,
       "englishAddress": "", // 영어 주소
       "jibunAddress": "", // 지번
