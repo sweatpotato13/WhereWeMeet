@@ -30,7 +30,6 @@ const addrY = result['addresses'[0]['y'] // 해당 주소와 가장 유사한 y 
 longitude : 126.8818394974154, latitude : 37.566755124713694
 ```json
 {
-  "Result" : {
     "status" : {
       "code":0,
       "name":"ok",
