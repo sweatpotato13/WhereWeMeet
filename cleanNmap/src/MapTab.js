@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import NaverMapView, { Marker } from './map';
 import { TextInput, StyleSheet, PermissionsAndroid, Platform, Text, TouchableOpacity, View, Alert } from 'react-native';
 
-import { getGeoObj } from './common/geo';
+import { getGeoObj, getReverseGeoObj } from './common/geo';
 
 /* TODO ::
     1. Design : 검색 floating button을 눌렀을 때 검색창이 뜨도록
-      1.2. searchActivate button 이미지 파일(.svg)
+      1.1. searchActivate button 이미지 파일(.svg)
     2. Function : 기능 수행
-      2.1. geo
-        2.1.1. ~~마커 찍기~~
-        2.1.2. ~마커 좌표로 이동시키기 -> 기능 검색!~
-        2.1.3. 해당 좌표의 세부 정보를 보여주는 창 만들기
+      2.1. 마커 클릭했을 때 해당 좌표의 세부 정보를 보여주는 창 만들기
+      2.2. ReverseCoding으로 해당 좌표에 대한 정보 받아오기
 */ 
 
 const MapViewScreen = ({navigation}) => {
@@ -21,8 +19,9 @@ const MapViewScreen = ({navigation}) => {
   }, []);
 
   const [localInfo, setLocalInfo] = useState({latitude: 37.5665, longitude: 126.87905});
-  const [searchFlag, setSearchFlag] = useState(false); // module 분리 시 state는 어떻게,,,?
+  const [searchFlag, setSearchFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState('');
+  const [infoFlag, setInfoFlag] = useState(false);
 
   // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
   const makeMarker = (latitude, longitude) => {
@@ -30,8 +29,18 @@ const MapViewScreen = ({navigation}) => {
       <Marker coordinate={{latitude, longitude}}
         title='해당 영역의 주소'
         description='장소 세부 정보'
-        onClick= {() => {
-          console.warn(`${longitutde}, ${latitude} marker clicked`);
+        onClick= {async () => {
+          const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
+          const result = reverseGeoObj['results'][2]['region']; // 1 : legalcode, 2 : admcode, 3 : addr
+          const si = result['area1']['name'];
+          const gu = result['area2']['name'];
+          const dong = result['area3']['name'];
+          const etc = result['area4']['name']; // TODO :: reverse geo api 문서 확인해보기
+          console.warn(`${longitude}, ${latitude} marker clicked`);
+          console.warn(`Result : ${JSON.stringify(result)}`);
+          // console.warn(`${si} ${gu} ${dong} ${etc}`);
+          setAddrInfo(`${si} ${gu} ${dong} ${etc}`);
+          setInfoFlag(!infoFlag);
         }
       }/>
     );
@@ -60,6 +69,7 @@ const MapViewScreen = ({navigation}) => {
                  placeholder={"지번, 도로명 주소 입력"}
                  onSubmitEditing={async () => {
                     //  setSearchFlag(!setSearchFlag); 축소시키는 기능도 필요하지 않을까?
+                    // ISSUE :: 올바르지 못한 주소를 입력하였을 때의 처리 필요 -> status 코드에 따라서! (올바를 경우 'OK')
                     const result = await getGeoObj(addrInfo);
                     const addr_x = Number(result['addresses'][0]['x']);
                     const addr_y = Number(result['addresses'][0]['y']);
@@ -74,22 +84,38 @@ const MapViewScreen = ({navigation}) => {
     );
   }
 
+  const infoItem = () => {
+    return (
+      <>
+        <Text style={styles.infoItemStyle}>{addrInfo}</Text>
+      </>
+    )
+  }
+
   return (
     <>
       <NaverMapView style={styles.naverMapViewStyle}
                     showsMyLocationButton={true}
-                    center={{...localInfo, zoom: 14}}
-                    onTouch = {e => console.warn('onTouch', JSON.stringify(e.nativeEvent))}
-                    onCameraChange = {e => console.warn('onCameraChange', JSON.stringify(e))}
+                    center={{...localInfo, zoom: 14}} // DISCUSS :: 무조건 센터로 와야 하나? 이거는 어떠헥 해야 할까?
+                    onTouch = {e => {
+                      setInfoFlag(false);
+                      console.warn('onTouch', JSON.stringify(e.nativeEvent))
+                    }}
+                    onCameraChange = {e => {
+                      setInfoFlag(false);
+                      console.warn('onCameraChange', JSON.stringify(e))
+                    }}
                     onMapClick = {e => {
                       console.warn('onMapClick', JSON.stringify(e));
                       setLocalInfo({latitude: e.latitude, longitude: e.longitude});
+                      setInfoFlag(false);
                     }}
                     useTextureView>
         {makeMarker(localInfo.latitude, localInfo.longitude)}
       </NaverMapView>
       {/* DISCUSS :: 굳이 버튼으로 동작시킬 필요가 있을까? 그냥 검색창만 띄우면 안될까? */}
       {!searchFlag ? searchActivateButton() : searchBar()}
+      {infoFlag ? infoItem() : <></>}
     </>
   );
 }
@@ -145,8 +171,16 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: 'white',
     padding: 10,
+  },
+  infoItemStyle: {
+    // position: 'absolute',
+    bottom: '13%',
+    alignSelf: 'center',
+    width: '90%',
+    height: '10%',
+    backgroundColor: 'white',
+    padding: 10
   }
-
 });
 
 export default MapViewScreen;
