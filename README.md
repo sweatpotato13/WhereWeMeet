@@ -88,7 +88,7 @@
   1. legalcode : 법정동
   2. admcode : 행정동
   3. addr : 지번주소
-  4. roadaddr : ehfhaud wnth
+  4. roadaddr : 도로명 주소
 - 상세주소가 없는 경우에 대응하기 위해서 상세주소가 필요하 때는 모든 주소를 받는 것을 api에서느 추천함.
 - result : 네이버 그린 팩토리 -> 경기도 성남시 분당구 불정로 6 그린팩토리(정자동 178-1)
 ```json
