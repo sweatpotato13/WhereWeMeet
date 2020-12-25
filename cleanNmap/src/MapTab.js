@@ -10,6 +10,7 @@ import { getGeoObj, getReverseGeoObj } from './common/geo';
     2. Function : 기능 수행
       2.1. 마커 클릭했을 때 해당 좌표의 세부 정보를 보여주는 창 만들기
       2.2. ReverseCoding으로 해당 좌표에 대한 정보 받아오기
+        2.2.1. 도로명 및 일반 주소를 불러오는 방법
 */ 
 
 const MapViewScreen = ({navigation}) => {
@@ -31,12 +32,12 @@ const MapViewScreen = ({navigation}) => {
         description='장소 세부 정보'
         onClick= {async () => {
           const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
-          const result = reverseGeoObj['results'][2]['region']; // 1 : legalcode, 2 : admcode, 3 : addr
-          const si = result['area1']['name'];
-          const gu = result['area2']['name'];
-          const dong = result['area3']['name'];
-          const etc = result['area4']['name']; // TODO :: reverse geo api 문서 확인해보기
-          console.warn(`${longitude}, ${latitude} marker clicked`);
+          const result = reverseGeoObj['results']//[2]['region']; // 1 : legalcode, 2 : admcode, 3 : addr
+          // const si = result['area1']['name'];
+          // const gu = result['area2']['name'];
+          // const dong = result['area3']['name'];
+          // const etc = result['area4']['name']; // TODO :: reverse geo api 문서 확인해보기
+          // console.warn(`${longitude}, ${latitude} marker clicked`);
           console.warn(`Result : ${JSON.stringify(result)}`);
           // console.warn(`${si} ${gu} ${dong} ${etc}`);
           setAddrInfo(`${si} ${gu} ${dong} ${etc}`);
@@ -69,13 +70,17 @@ const MapViewScreen = ({navigation}) => {
                  placeholder={"지번, 도로명 주소 입력"}
                  onSubmitEditing={async () => {
                     //  setSearchFlag(!setSearchFlag); 축소시키는 기능도 필요하지 않을까?
-                    // ISSUE :: 올바르지 못한 주소를 입력하였을 때의 처리 필요 -> status 코드에 따라서! (올바를 경우 'OK')
                     const result = await getGeoObj(addrInfo);
-                    const addr_x = Number(result['addresses'][0]['x']);
-                    const addr_y = Number(result['addresses'][0]['y']);
-                    console.warn(`latitude : ${addr_x}, longitude : ${addr_y}`);
-                    setLocalInfo({latitude: addr_y, longitude: addr_x});
-                    makeMarker(addr_y, addr_x);
+
+                    if(result.length != 0) {
+                      const addr_x = Number(result[0]['x']);
+                      const addr_y = Number(result[0]['y']);
+                      console.warn(`latitude : ${addr_x}, longitude : ${addr_y}`);
+                      setLocalInfo({latitude: addr_y, longitude: addr_x});
+                      makeMarker(addr_y, addr_x);
+                    } else {
+                      Alert.alert('주소 오류', '해당 주소에 대한 정보가 없습니다.');
+                    }
                  }}
                  onChangeText={(text) => {
                    setAddrInfo(text); // TODO :: 렌더링 최적화 필요 -> useEffect
