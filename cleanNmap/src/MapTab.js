@@ -11,6 +11,8 @@ import { getGeoObj, getReverseGeoObj } from './common/geo';
       2.1. 마커 클릭했을 때 해당 좌표의 세부 정보를 보여주는 창 만들기
       2.2. ReverseCoding으로 해당 좌표에 대한 정보 받아오기
         2.2.1. 도로명 및 일반 주소를 불러오는 방법
+          - 도로명 주소와 지번 주소의 동까지는 유사, 이후 주소에서 차이가 있음(land)
+          - 'land' key에 대한 내용 확인 필요
 */ 
 
 const MapViewScreen = ({navigation}) => {
@@ -31,16 +33,29 @@ const MapViewScreen = ({navigation}) => {
         title='해당 영역의 주소'
         description='장소 세부 정보'
         onClick= {async () => {
+          // 도로명 주소가 가장 상세 주소를 알 수 있음
           const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
-          const result = reverseGeoObj['results']//[2]['region']; // 1 : legalcode, 2 : admcode, 3 : addr
-          // const si = result['area1']['name'];
-          // const gu = result['area2']['name'];
-          // const dong = result['area3']['name'];
-          // const etc = result['area4']['name']; // TODO :: reverse geo api 문서 확인해보기
-          // console.warn(`${longitude}, ${latitude} marker clicked`);
-          console.warn(`Result : ${JSON.stringify(result)}`);
-          // console.warn(`${si} ${gu} ${dong} ${etc}`);
-          setAddrInfo(`${si} ${gu} ${dong} ${etc}`);
+          const addr = reverseGeoObj[2];
+          const roadAddr = reverseGeoObj[3];
+
+          console.warn(`Result : ${JSON.stringify(roadAddr['land'])}`);
+
+          // TEST :: 서울이 아닌 지역의 경우 어떻게 되는가
+          const area1 = roadAddr['region']['area1']['name']; // e.g) 경기도
+          const area2 = roadAddr['region']['area2']['name']; // e.g) 성남시 분당구
+          const area3 = roadAddr['region']['area3']['name']; // e.g) 정자동
+          const area4 = roadAddr['region']['area4']['name']; // NOTICE :: 용도 확인 필요!!
+          const landRoad = roadAddr['land']['name']; // e.g) 불정로
+          const landRoadNum1 = roadAddr['land']['number1']; // e.g) 6
+          const landRaodNum2 = roadAddr['land']['number2']; // e.g) 없을 수도 있음, 있을 때도 있음. 21-14에서 14에 해당
+          const addition0 = roadAddr['land']['addition0']['value']; // e.g) NAVER그린팩토리
+
+          const landAddrNum1 = addr['land']['number1'];
+          const landAddrNum2 = addr['land']['number2'];
+
+          const detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`
+
+          setAddrInfo(detailAddr);
           setInfoFlag(!infoFlag);
         }
       }/>

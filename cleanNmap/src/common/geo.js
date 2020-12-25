@@ -16,8 +16,8 @@ export async function getReverseGeoObj(long, lat) {
     const response = await fetch(url, { method: "GET", headers: myHeaders });
     assert(response.ok, "Failed to fetch document");
     const obj = await response.json();
-    console.log(obj);
-    return obj;
+    // console.log(obj);
+    return obj['results'];
 }
 
 export function getGeoUrl(addr) {
