@@ -4,17 +4,6 @@ import { TextInput, StyleSheet, PermissionsAndroid, Platform, Text, TouchableOpa
 
 import { getGeoObj, getReverseGeoObj } from './common/geo';
 
-/* TODO ::
-    1. Design : 검색 floating button을 눌렀을 때 검색창이 뜨도록
-      1.1. searchActivate button 이미지 파일(.svg)
-    2. Function : 기능 수행
-      2.1. 마커 클릭했을 때 해당 좌표의 세부 정보를 보여주는 창 만들기
-      2.2. ReverseCoding으로 해당 좌표에 대한 정보 받아오기
-        2.2.1. 도로명 및 일반 주소를 불러오는 방법
-          - 도로명 주소와 지번 주소의 동까지는 유사, 이후 주소에서 차이가 있음(land)
-          - 'land' key에 대한 내용 확인 필요
-*/ 
-
 const MapViewScreen = ({navigation}) => {
   
   useEffect(() => {
@@ -22,7 +11,6 @@ const MapViewScreen = ({navigation}) => {
   }, []);
 
   const [localInfo, setLocalInfo] = useState({latitude: 37.5665, longitude: 126.87905});
-  const [searchFlag, setSearchFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState('');
   const [infoFlag, setInfoFlag] = useState(false);
 
@@ -59,23 +47,6 @@ const MapViewScreen = ({navigation}) => {
           setInfoFlag(!infoFlag);
         }
       }/>
-    );
-  }
-
-  const searchActivateButton = () => {
-    return (
-      <TouchableOpacity style={styles.touchableOpacityStyle}
-                        onPress={() => navigation.navigate('stack')}>
-        <View>
-          <Text style={styles.floatingButtonStyle}
-                onPress={() => {
-                  setSearchFlag(!searchFlag);
-                  console.warn('searchBar activate');
-                }}>
-            Search
-          </Text>
-        </View>
-      </TouchableOpacity>
     );
   }
 
@@ -116,7 +87,7 @@ const MapViewScreen = ({navigation}) => {
     <>
       <NaverMapView style={styles.naverMapViewStyle}
                     showsMyLocationButton={true}
-                    center={{...localInfo, zoom: 14}} // DISCUSS :: 무조건 센터로 와야 하나? 이거는 어떠헥 해야 할까?
+                    center={{...localInfo, zoom: 14}} // DISCUSS :: 수정 필요
                     onTouch = {e => {
                       setInfoFlag(false);
                       console.warn('onTouch', JSON.stringify(e.nativeEvent))
@@ -133,8 +104,7 @@ const MapViewScreen = ({navigation}) => {
                     useTextureView>
         {makeMarker(localInfo.latitude, localInfo.longitude)}
       </NaverMapView>
-      {/* DISCUSS :: 굳이 버튼으로 동작시킬 필요가 있을까? 그냥 검색창만 띄우면 안될까? */}
-      {!searchFlag ? searchActivateButton() : searchBar()}
+      {searchBar()}
       {infoFlag ? infoItem() : <></>}
     </>
   );
@@ -171,16 +141,8 @@ const styles = StyleSheet.create({
   touchableOpacityStyle: {
     position: 'absolute',
     top: '2%',
-    right: '4%', // 단위가 생략되어 있다.
-    // width: '5%',
+    right: '4%',
     height: '5%'
-  },
-  floatingButtonStyle: {
-    color: 'white',
-    backgroundColor: 'gray',
-    textAlign: 'center',
-    width: 50,
-    height: 50,
   },
   searchBarStyle: {
     position: 'absolute',
