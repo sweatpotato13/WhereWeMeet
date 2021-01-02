@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
+const locationArray = [];
 
 const MapViewScreen = ({ navigation }) => {
     useEffect(() => {
@@ -25,7 +26,6 @@ const MapViewScreen = ({ navigation }) => {
     });
     const [addrInfo, setAddrInfo] = useState("");
     const [infoFlag, setInfoFlag] = useState(false);
-
     // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
     const makeMarker = (latitude, longitude) => {
         return (
@@ -63,6 +63,7 @@ const MapViewScreen = ({ navigation }) => {
 
                     setAddrInfo(detailAddr);
                     setInfoFlag(!infoFlag);
+                    console.log(locationArray);
                 }}
             />
         );
@@ -104,8 +105,52 @@ const MapViewScreen = ({ navigation }) => {
             <View style={styles.infoItemStyle}>
                 <Text>{addrInfo}</Text>
                 <View style="flexDirection: column">
-                    <Button title="Add" />
-                    <Button title="Remove" />
+                    <Button
+                        title="Add"
+                        onPress={() => {
+                            const len = locationArray.length;
+                            let isExist = false;
+                            for (let i = 0; i < len; i++) {
+                                if (
+                                    locationArray[i].latitude ==
+                                        localInfo.latitude &&
+                                    locationArray[i].longitude ==
+                                        localInfo.longitude
+                                ) {
+                                    isExist = true;
+                                    console.log("Already Exist");
+                                    break;
+                                }
+                            }
+                            if (!isExist) {
+                                locationArray.push({
+                                    latitude: localInfo.latitude,
+                                    longitude: localInfo.longitude
+                                });
+                            }
+                        }}
+                    />
+                    <Button
+                        title="Remove"
+                        onPress={() => {
+                            const len = locationArray.length;
+                            let idx = -1;
+                            for (let i = 0; i < len; i++) {
+                                if (
+                                    locationArray[i].latitude ==
+                                        localInfo.latitude &&
+                                    locationArray[i].longitude ==
+                                        localInfo.longitude
+                                ) {
+                                    idx = i;
+                                    break;
+                                }
+                            }
+                            if (idx != -1) {
+                                locationArray.splice(idx, 1);
+                            }
+                        }}
+                    />
                 </View>
             </View>
         );
