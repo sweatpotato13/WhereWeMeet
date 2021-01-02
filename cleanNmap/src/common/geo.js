@@ -17,7 +17,7 @@ export async function getReverseGeoObj(long, lat) {
     assert(response.ok, "Failed to fetch document");
     const obj = await response.json();
     // console.log(obj);
-    return obj['results'];
+    return obj["results"];
 }
 
 export function getGeoUrl(addr) {
@@ -34,5 +34,5 @@ export async function getGeoObj(addr) {
     assert(response.ok, "Failed to fetch document");
     const obj = await response.json();
     // console.log(obj);
-    return obj['addresses']; // ADJUST :: addresses 속성의 정보만 필요하기 때문에 해당 객체만 반환하도록 수정
+    return obj["addresses"]; // ADJUST :: addresses 속성의 정보만 필요하기 때문에 해당 객체만 반환하도록 수정
 }
