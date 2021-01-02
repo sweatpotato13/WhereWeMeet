@@ -42,24 +42,37 @@ const MapViewScreen = ({ navigation }) => {
                     const addr = reverseGeoObj[2];
                     const roadAddr = reverseGeoObj[3];
 
-                    console.warn(
-                        `Result : ${JSON.stringify(roadAddr["land"])}`
-                    );
+                    if(typeof(roadAddr) == 'undefined') { // 올바르지 못한 주소일 경우
+                      Alert.alert('주소 오류', '해당 주소에 대한 정보가 없습니다.');
+                   } else { // 올바른 주소일 경우
+                      console.warn(`${JSON.stringify(roadAddr)}`);
+                      const area1 = roadAddr['region']['area1']['name']; // e.g) 경기도
+                      const area2 = roadAddr['region']['area2']['name']; // e.g) 성남시 분당구
+                      const area3 = roadAddr['region']['area3']['name']; // e.g) 정자동
+                      const area4 = roadAddr['region']['area4']['name']; // NOTICE :: 용도 확인 필요!!
+                      const landRoad = roadAddr['land']['name']; // e.g) 불정로
+                      const landRoadNum1 = roadAddr['land']['number1']; // e.g) 6
+                      const landRaodNum2 = roadAddr['land']['number2']; // e.g) 없을 수도 있음, 있을 때도 있음. 21-14에서 14에 해당
+                      const addition0 = roadAddr['land']['addition0']['value']; // e.g) NAVER그린팩토리
 
-                    // TEST :: 서울이 아닌 지역의 경우 어떻게 되는가
-                    const area1 = roadAddr["region"]["area1"]["name"]; // e.g) 경기도
-                    const area2 = roadAddr["region"]["area2"]["name"]; // e.g) 성남시 분당구
-                    const area3 = roadAddr["region"]["area3"]["name"]; // e.g) 정자동
-                    const area4 = roadAddr["region"]["area4"]["name"]; // NOTICE :: 용도 확인 필요!!
-                    const landRoad = roadAddr["land"]["name"]; // e.g) 불정로
-                    const landRoadNum1 = roadAddr["land"]["number1"]; // e.g) 6
-                    const landRaodNum2 = roadAddr["land"]["number2"]; // e.g) 없을 수도 있음, 있을 때도 있음. 21-14에서 14에 해당
-                    const addition0 = roadAddr["land"]["addition0"]["value"]; // e.g) NAVER그린팩토리
+                      const landAddrNum1 = addr['land']['number1'];
+                      const landAddrNum2 = addr['land']['number2'];
 
-                    const landAddrNum1 = addr["land"]["number1"];
-                    const landAddrNum2 = addr["land"]["number2"];
-
-                    const detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
+                      let detailAddr = '';
+                      // TODO :: 존재하지 않는 경우애 대한 처리가 필요하다. 비어 있는 문자열일 경우에 대한 처리 필요!!! 삼항 연산자를 활용
+                      if(addition0 != '') {
+                        if(landRaodNum2 != '') {
+                           detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`
+                        } else {
+                          detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}`
+                        }
+                      } else {
+                         if(landRaodNum2 != '') {
+                          detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`
+                         } else {
+                          detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}`
+                         }
+                      }
 
                     setAddrInfo(detailAddr);
                     setInfoFlag(!infoFlag);
