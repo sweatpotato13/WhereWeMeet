@@ -26,6 +26,7 @@ const MapViewScreen = ({ navigation }) => {
   });
   const [addrInfo, setAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
+
   // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
   const makeMarker = (latitude, longitude) => {
     return (
@@ -58,7 +59,6 @@ const MapViewScreen = ({ navigation }) => {
             const landAddrNum2 = addr["land"]["number2"];
 
             let detailAddr = "";
-            // TODO :: 존재하지 않는 경우애 대한 처리가 필요하다. 비어 있는 문자열일 경우에 대한 처리 필요!!! 삼항 연산자를 활용
             if (addition0 != "") {
               if (landRaodNum2 != "") {
                 detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
@@ -88,7 +88,6 @@ const MapViewScreen = ({ navigation }) => {
         style={styles.searchBarStyle}
         placeholder={"지번, 도로명 주소 입력"}
         onSubmitEditing={async () => {
-          //  setSearchFlag(!setSearchFlag); 축소시키는 기능도 필요하지 않을까?
           const result = await getGeoObj(addrInfo);
 
           if (result.length != 0) {
@@ -116,6 +115,7 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Add"
             onPress={() => {
+              Alert.alert(`${addrInfo}`, '추가됨');
               const len = locationArray.length;
               let isExist = false;
               for (let i = 0; i < len; i++) {
@@ -184,7 +184,14 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
+        {/* TODO :: 제거가 원활히 되지 않는다.
+                    추가되지 않은 좌표에서 REMOVE를 눌렀을 때의 액션 필요 
+                    추가되는 마커마다 다른 색을 적용해야 한다.
+        */}
         {makeMarker(localInfo.latitude, localInfo.longitude)}
+        {locationArray.map((location) => {
+          return makeMarker(location.latitude, location.longitude)
+        })}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
