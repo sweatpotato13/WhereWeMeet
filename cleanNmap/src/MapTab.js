@@ -34,7 +34,7 @@ const MapViewScreen = ({ navigation }) => {
         coordinate={{ latitude, longitude }}
         title="해당 영역의 주소"
         description="장소 세부 정보"
-        onClick={async () => {
+        onClick={async () => { // DISCUSS :: marker를 클릭하면 바로 뜨게 해야하나 인포 정보가?
           // 도로명 주소가 가장 상세 주소를 알 수 있음
           const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
           const addr = reverseGeoObj[2];
@@ -45,7 +45,7 @@ const MapViewScreen = ({ navigation }) => {
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
           } else {
             // 올바른 주소일 경우
-            console.warn(`${JSON.stringify(roadAddr)}`);
+            // console.warn(`${JSON.stringify(roadAddr)}`);
             const area1 = roadAddr["region"]["area1"]["name"]; // e.g) 경기도
             const area2 = roadAddr["region"]["area2"]["name"]; // e.g) 성남시 분당구
             const area3 = roadAddr["region"]["area3"]["name"]; // e.g) 정자동
@@ -73,6 +73,7 @@ const MapViewScreen = ({ navigation }) => {
               }
             }
 
+            setLocalInfo({ latitude, longitude });
             setAddrInfo(detailAddr);
             setInfoFlag(!infoFlag);
             console.log(locationArray);
@@ -139,20 +140,27 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Remove"
             onPress={() => {
+              // Alert.alert(`${addrInfo}`, '제거합니다.');
               const len = locationArray.length;
               let idx = -1;
               for (let i = 0; i < len; i++) {
+                // console.log(`${i + 1} marker locainfo : ${locationArray[i].latitude}, ${locationArray[i].longitude}`);
+                // console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
                 if (
-                  locationArray[i].latitude == localInfo.latitude &&
-                  locationArray[i].longitude == localInfo.longitude
+                  locationArray[i].latitude === localInfo.latitude &&
+                  locationArray[i].longitude === localInfo.longitude
                 ) {
                   idx = i;
                   break;
                 }
               }
-              if (idx != -1) {
-                locationArray.splice(idx, 1);
-              }
+              // console.log(idx);
+              // if (idx != -1) {
+              //   // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
+              //   //          이 부분에 대한 문제 해결이 필요함.
+              //   locationArray.splice(0, idx).concat(idx + 1, len);
+              // }
+              // console.log(`deleted locationArray : ${locationArray}`);
             }}
           />
         </View>
@@ -168,14 +176,14 @@ const MapViewScreen = ({ navigation }) => {
         center={{ ...localInfo, zoom: 14 }} // DISCUSS :: 수정 필요
         onTouch={e => {
           setInfoFlag(false);
-          console.warn("onTouch", JSON.stringify(e.nativeEvent));
+          // console.warn("onTouch", JSON.stringify(e.nativeEvent));
         }}
         onCameraChange={e => {
           setInfoFlag(false);
-          console.warn("onCameraChange", JSON.stringify(e));
+          // console.warn("onCameraChange", JSON.stringify(e));
         }}
         onMapClick={e => {
-          console.warn("onMapClick", JSON.stringify(e));
+          // console.warn("onMapClick", JSON.stringify(e));
           setLocalInfo({
             latitude: e.latitude,
             longitude: e.longitude
@@ -184,14 +192,8 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
-        {/* TODO :: 제거가 원활히 되지 않는다.
-                    추가되지 않은 좌표에서 REMOVE를 눌렀을 때의 액션 필요 
-                    추가되는 마커마다 다른 색을 적용해야 한다.
-        */}
         {makeMarker(localInfo.latitude, localInfo.longitude)}
-        {locationArray.map((location) => {
-          return makeMarker(location.latitude, location.longitude)
-        })}
+        {locationArray.map(location => (makeMarker(location.latitude, location.longitude)))}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
