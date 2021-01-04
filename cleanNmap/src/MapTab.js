@@ -45,7 +45,6 @@ const MapViewScreen = ({ navigation }) => {
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
           } else {
             // 올바른 주소일 경우
-            // console.warn(`${JSON.stringify(roadAddr)}`);
             const area1 = roadAddr["region"]["area1"]["name"]; // e.g) 경기도
             const area2 = roadAddr["region"]["area2"]["name"]; // e.g) 성남시 분당구
             const area3 = roadAddr["region"]["area3"]["name"]; // e.g) 정자동
@@ -140,7 +139,7 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Remove"
             onPress={() => {
-              // Alert.alert(`${addrInfo}`, '제거합니다.');
+              Alert.alert(`${addrInfo}`, '제거합니다.');
               const len = locationArray.length;
               let idx = -1;
               for (let i = 0; i < len; i++) {
@@ -176,14 +175,11 @@ const MapViewScreen = ({ navigation }) => {
         center={{ ...localInfo, zoom: 14 }} // DISCUSS :: 수정 필요
         onTouch={e => {
           setInfoFlag(false);
-          // console.warn("onTouch", JSON.stringify(e.nativeEvent));
         }}
         onCameraChange={e => {
           setInfoFlag(false);
-          // console.warn("onCameraChange", JSON.stringify(e));
         }}
         onMapClick={e => {
-          // console.warn("onMapClick", JSON.stringify(e));
           setLocalInfo({
             latitude: e.latitude,
             longitude: e.longitude
