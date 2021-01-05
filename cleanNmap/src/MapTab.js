@@ -143,8 +143,8 @@ const MapViewScreen = ({ navigation }) => {
               const len = locationArray.length;
               let idx = -1;
               for (let i = 0; i < len; i++) {
-                // console.log(`${i + 1} marker locainfo : ${locationArray[i].latitude}, ${locationArray[i].longitude}`);
-                // console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
+                console.log(`${i + 1} marker locainfo : ${locationArray[i].latitude}, ${locationArray[i].longitude}`);
+                console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
                 if (
                   locationArray[i].latitude === localInfo.latitude &&
                   locationArray[i].longitude === localInfo.longitude
@@ -153,13 +153,13 @@ const MapViewScreen = ({ navigation }) => {
                   break;
                 }
               }
-              // console.log(idx);
-              // if (idx != -1) {
-              //   // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
-              //   //          이 부분에 대한 문제 해결이 필요함.
-              //   locationArray.splice(0, idx).concat(idx + 1, len);
-              // }
-              // console.log(`deleted locationArray : ${locationArray}`);
+              console.log(idx);
+              if (idx != -1) {
+                // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
+                //          이 부분에 대한 문제 해결이 필요함.
+                locationArray.splice(0, idx).concat(idx + 1, len);
+              }
+              console.log(`deleted locationArray : ${locationArray}`);
             }}
           />
         </View>
