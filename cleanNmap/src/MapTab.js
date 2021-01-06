@@ -12,6 +12,12 @@ import {
   TouchableOpacity
 } from "react-native";
 
+/* TODO :: 검색창, 마커 리스트 렌더링 최적화 작업 필요
+    1. 검색창 -> 텍스트가 모두 입력된 후 state에 적용되도록 수정
+    2. 마커 리스트 -> 제거 시 다른 마커가 생기지 않으면 제거되지 않는 문제가 있음
+    useEffect 사용방법 확인을 통해 해당 문제 해결 에정
+*/
+
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
 const locationArray = [];
 
@@ -101,7 +107,7 @@ const MapViewScreen = ({ navigation }) => {
           }
         }}
         onChangeText={text => {
-          setAddrInfo(text); // TODO :: 렌더링 최적화 필요 -> useEffect
+          setAddrInfo(text);
         }}
       />
     );
