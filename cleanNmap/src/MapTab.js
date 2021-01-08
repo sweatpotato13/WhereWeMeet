@@ -12,10 +12,10 @@ import {
   TouchableOpacity
 } from "react-native";
 
-/* TODO :: 검색창, 마커 리스트 렌더링 최적화 작업 필요
-    1. 검색창 -> 텍스트가 모두 입력된 후 state에 적용되도록 수정
-    2. 마커 리스트 -> 제거 시 다른 마커가 생기지 않으면 제거되지 않는 문제가 있음
-    useEffect 사용방법 확인을 통해 해당 문제 해결 에정
+/* TODO ::
+    추가와 삭제 기능이 구현은 되어 있으나 제대로 동작하지 않는다.
+    locationArray에 저장하는 객체의 형태를 변경 -> 구조 수정
+    makeMarker 렌더링 하는 방법을 개선해야 한다. -> 현재 무조건 뜨게 되어 있음.
 */
 
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
@@ -24,7 +24,7 @@ const locationArray = [];
 const MapViewScreen = ({ navigation }) => {
   useEffect(() => {
     requestLocationPermission();
-  }, []);
+  }, [addrInfo]);
 
   const [localInfo, setLocalInfo] = useState({
     latitude: 37.5665,
@@ -159,13 +159,12 @@ const MapViewScreen = ({ navigation }) => {
                   break;
                 }
               }
-              console.log(idx);
+
               if (idx != -1) {
                 // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
                 //          이 부분에 대한 문제 해결이 필요함.
                 locationArray.splice(0, idx).concat(idx + 1, len);
               }
-              console.log(`deleted locationArray : ${locationArray}`);
             }}
           />
         </View>
@@ -194,7 +193,9 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
+        {/* 얘도 결국 제거해야 하는데... 첫 화면 문제 */}
         {makeMarker(localInfo.latitude, localInfo.longitude)}
+        {/* error가 뜨는 것을 방지, 에러는 떠도 동작에 문제는 없음 */}
         {locationArray.map(location => (makeMarker(location.latitude, location.longitude)))}
       </NaverMapView>
       {searchBar()}
