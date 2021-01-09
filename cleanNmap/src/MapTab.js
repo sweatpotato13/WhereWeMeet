@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
+import { getCenter } from "./common/common";
 const locationArray = [];
 
 const MapViewScreen = ({ navigation }) => {
@@ -76,6 +77,7 @@ const MapViewScreen = ({ navigation }) => {
             setAddrInfo(detailAddr);
             setInfoFlag(!infoFlag);
             console.log(locationArray);
+            console.log(getCenter(locationArray));
           }
         }}
       />
