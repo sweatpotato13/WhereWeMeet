@@ -12,13 +12,19 @@ import {
   TouchableOpacity
 } from "react-native";
 
+/* TODO ::
+    추가와 삭제 기능이 구현은 되어 있으나 제대로 동작하지 않는다.
+    locationArray에 저장하는 객체의 형태를 변경 -> 구조 수정
+    makeMarker 렌더링 하는 방법을 개선해야 한다. -> 현재 무조건 뜨게 되어 있음.
+*/
+
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
 const locationArray = [];
 
 const MapViewScreen = ({ navigation }) => {
   useEffect(() => {
     requestLocationPermission();
-  }, []);
+  }, [addrInfo]);
 
   const [localInfo, setLocalInfo] = useState({
     latitude: 37.5665,
@@ -26,6 +32,7 @@ const MapViewScreen = ({ navigation }) => {
   });
   const [addrInfo, setAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
+
   // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
   const makeMarker = (latitude, longitude) => {
     return (
@@ -33,7 +40,7 @@ const MapViewScreen = ({ navigation }) => {
         coordinate={{ latitude, longitude }}
         title="해당 영역의 주소"
         description="장소 세부 정보"
-        onClick={async () => {
+        onClick={async () => { // DISCUSS :: marker를 클릭하면 바로 뜨게 해야하나 인포 정보가?
           // 도로명 주소가 가장 상세 주소를 알 수 있음
           const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
           const addr = reverseGeoObj[2];
@@ -44,7 +51,6 @@ const MapViewScreen = ({ navigation }) => {
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
           } else {
             // 올바른 주소일 경우
-            console.warn(`${JSON.stringify(roadAddr)}`);
             const area1 = roadAddr["region"]["area1"]["name"]; // e.g) 경기도
             const area2 = roadAddr["region"]["area2"]["name"]; // e.g) 성남시 분당구
             const area3 = roadAddr["region"]["area3"]["name"]; // e.g) 정자동
@@ -58,7 +64,6 @@ const MapViewScreen = ({ navigation }) => {
             const landAddrNum2 = addr["land"]["number2"];
 
             let detailAddr = "";
-            // TODO :: 존재하지 않는 경우애 대한 처리가 필요하다. 비어 있는 문자열일 경우에 대한 처리 필요!!! 삼항 연산자를 활용
             if (addition0 != "") {
               if (landRaodNum2 != "") {
                 detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
@@ -73,6 +78,7 @@ const MapViewScreen = ({ navigation }) => {
               }
             }
 
+            setLocalInfo({ latitude, longitude });
             setAddrInfo(detailAddr);
             setInfoFlag(!infoFlag);
             console.log(locationArray);
@@ -88,7 +94,6 @@ const MapViewScreen = ({ navigation }) => {
         style={styles.searchBarStyle}
         placeholder={"지번, 도로명 주소 입력"}
         onSubmitEditing={async () => {
-          //  setSearchFlag(!setSearchFlag); 축소시키는 기능도 필요하지 않을까?
           const result = await getGeoObj(addrInfo);
 
           if (result.length != 0) {
@@ -102,7 +107,7 @@ const MapViewScreen = ({ navigation }) => {
           }
         }}
         onChangeText={text => {
-          setAddrInfo(text); // TODO :: 렌더링 최적화 필요 -> useEffect
+          setAddrInfo(text);
         }}
       />
     );
@@ -116,6 +121,7 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Add"
             onPress={() => {
+              Alert.alert(`${addrInfo}`, '추가됨');
               const len = locationArray.length;
               let isExist = false;
               for (let i = 0; i < len; i++) {
@@ -139,19 +145,25 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Remove"
             onPress={() => {
+              Alert.alert(`${addrInfo}`, '제거합니다.');
               const len = locationArray.length;
               let idx = -1;
               for (let i = 0; i < len; i++) {
+                console.log(`${i + 1} marker locainfo : ${locationArray[i].latitude}, ${locationArray[i].longitude}`);
+                console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
                 if (
-                  locationArray[i].latitude == localInfo.latitude &&
-                  locationArray[i].longitude == localInfo.longitude
+                  locationArray[i].latitude === localInfo.latitude &&
+                  locationArray[i].longitude === localInfo.longitude
                 ) {
                   idx = i;
                   break;
                 }
               }
+
               if (idx != -1) {
-                locationArray.splice(idx, 1);
+                // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
+                //          이 부분에 대한 문제 해결이 필요함.
+                locationArray.splice(0, idx).concat(idx + 1, len);
               }
             }}
           />
@@ -168,14 +180,11 @@ const MapViewScreen = ({ navigation }) => {
         center={{ ...localInfo, zoom: 14 }} // DISCUSS :: 수정 필요
         onTouch={e => {
           setInfoFlag(false);
-          console.warn("onTouch", JSON.stringify(e.nativeEvent));
         }}
         onCameraChange={e => {
           setInfoFlag(false);
-          console.warn("onCameraChange", JSON.stringify(e));
         }}
         onMapClick={e => {
-          console.warn("onMapClick", JSON.stringify(e));
           setLocalInfo({
             latitude: e.latitude,
             longitude: e.longitude
@@ -184,7 +193,10 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
+        {/* 얘도 결국 제거해야 하는데... 첫 화면 문제 */}
         {makeMarker(localInfo.latitude, localInfo.longitude)}
+        {/* error가 뜨는 것을 방지, 에러는 떠도 동작에 문제는 없음 */}
+        {locationArray.map(location => (makeMarker(location.latitude, location.longitude)))}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
