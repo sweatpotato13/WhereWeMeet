@@ -20,6 +20,15 @@ import {
 
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
 import { getCenter } from "./common/common";
+
+/* NOTICE :: 
+  makrerList에 저장되는 데이터 형태
+  `{
+    latitude,
+    longitude,
+    marker
+  }`
+ */
 const markerList = [];
 
 const MapViewScreen = ({ navigation }) => {
@@ -31,6 +40,7 @@ const MapViewScreen = ({ navigation }) => {
     latitude: 37.5665,
     longitude: 126.87905
   });
+  const [markerFlag, setMarkerFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
 
@@ -40,17 +50,14 @@ const MapViewScreen = ({ navigation }) => {
         coordinate={{ latitude, longitude }}
         title="해당 영역의 주소"
         description="장소 세부 정보"
-        onClick={async () => { // DISCUSS :: marker를 클릭하면 바로 뜨게 해야하나 인포 정보가?
-          // 도로명 주소가 가장 상세 주소를 알 수 있음
+        onClick={async () => {
           const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
           const addr = reverseGeoObj[2];
           const roadAddr = reverseGeoObj[3];
 
           if (typeof roadAddr == "undefined") {
-            // 올바르지 못한 주소일 경우
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
           } else {
-            // 올바른 주소일 경우
             const area1 = roadAddr["region"]["area1"]["name"]; // e.g) 경기도
             const area2 = roadAddr["region"]["area2"]["name"]; // e.g) 성남시 분당구
             const area3 = roadAddr["region"]["area3"]["name"]; // e.g) 정자동
@@ -81,7 +88,6 @@ const MapViewScreen = ({ navigation }) => {
             setLocalInfo({ latitude, longitude });
             setAddrInfo(detailAddr);
             setInfoFlag(!infoFlag);
-            console.log(markerList);
             console.log(getCenter(markerList));
           }
         }}
@@ -138,7 +144,8 @@ const MapViewScreen = ({ navigation }) => {
               if (!isExist) {
                 markerList.push({
                   latitude: localInfo.latitude,
-                  longitude: localInfo.longitude
+                  longitude: localInfo.longitude,
+                  marker: makeMarker(localInfo.latitude, localInfo.longitude)
                 });
               }
             }}
@@ -191,12 +198,13 @@ const MapViewScreen = ({ navigation }) => {
             latitude: e.latitude,
             longitude: e.longitude
           });
-          markerList.push(makeMarker(e.latitude, e.longitude));
+          setMarkerFlag(true);
           setInfoFlag(false);
         }}
         useTextureView
       >
-        {markerList.map(marker => marker)}
+        {markerFlag ? makeMarker(localInfo.latitude, localInfo.longitude) : <></>}
+        {markerList.map(marker => marker.marker)}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
