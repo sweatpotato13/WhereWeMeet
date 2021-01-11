@@ -14,13 +14,13 @@ import {
 
 /* TODO ::
     추가와 삭제 기능이 구현은 되어 있으나 제대로 동작하지 않는다.
-    locationArray에 저장하는 객체의 형태를 변경 -> 구조 수정
+    markerList에 저장하는 객체의 형태를 변경 -> 구조 수정
     makeMarker 렌더링 하는 방법을 개선해야 한다. -> 현재 무조건 뜨게 되어 있음.
 */
 
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
 import { getCenter } from "./common/common";
-const locationArray = [];
+const markerList = [];
 
 const MapViewScreen = ({ navigation }) => {
   useEffect(() => {
@@ -34,7 +34,6 @@ const MapViewScreen = ({ navigation }) => {
   const [addrInfo, setAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
 
-  // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
   const makeMarker = (latitude, longitude) => {
     return (
       <Marker
@@ -82,8 +81,8 @@ const MapViewScreen = ({ navigation }) => {
             setLocalInfo({ latitude, longitude });
             setAddrInfo(detailAddr);
             setInfoFlag(!infoFlag);
-            console.log(locationArray);
-            console.log(getCenter(locationArray));
+            console.log(markerList);
+            console.log(getCenter(markerList));
           }
         }}
       />
@@ -124,12 +123,12 @@ const MapViewScreen = ({ navigation }) => {
             title="Add"
             onPress={() => {
               Alert.alert(`${addrInfo}`, '추가됨');
-              const len = locationArray.length;
+              const len = markerList.length;
               let isExist = false;
               for (let i = 0; i < len; i++) {
                 if (
-                  locationArray[i].latitude == localInfo.latitude &&
-                  locationArray[i].longitude == localInfo.longitude
+                  markerList[i].latitude == localInfo.latitude &&
+                  markerList[i].longitude == localInfo.longitude
                 ) {
                   isExist = true;
                   console.log("Already Exist");
@@ -137,7 +136,7 @@ const MapViewScreen = ({ navigation }) => {
                 }
               }
               if (!isExist) {
-                locationArray.push({
+                markerList.push({
                   latitude: localInfo.latitude,
                   longitude: localInfo.longitude
                 });
@@ -148,14 +147,14 @@ const MapViewScreen = ({ navigation }) => {
             title="Remove"
             onPress={() => {
               Alert.alert(`${addrInfo}`, '제거합니다.');
-              const len = locationArray.length;
+              const len = markerList.length;
               let idx = -1;
               for (let i = 0; i < len; i++) {
-                console.log(`${i + 1} marker locainfo : ${locationArray[i].latitude}, ${locationArray[i].longitude}`);
+                console.log(`${i + 1} marker locainfo : ${markerList[i].latitude}, ${markerList[i].longitude}`);
                 console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
                 if (
-                  locationArray[i].latitude === localInfo.latitude &&
-                  locationArray[i].longitude === localInfo.longitude
+                  markerList[i].latitude === localInfo.latitude &&
+                  markerList[i].longitude === localInfo.longitude
                 ) {
                   idx = i;
                   break;
@@ -165,7 +164,7 @@ const MapViewScreen = ({ navigation }) => {
               if (idx != -1) {
                 // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
                 //          이 부분에 대한 문제 해결이 필요함.
-                locationArray.splice(0, idx).concat(idx + 1, len);
+                markerList.splice(0, idx).concat(idx + 1, len);
               }
             }}
           />
@@ -187,18 +186,17 @@ const MapViewScreen = ({ navigation }) => {
           setInfoFlag(false);
         }}
         onMapClick={e => {
+          // markerflag로 초기 마커를 찍고, add 눌렀을 때 마커를 추가하도록
           setLocalInfo({
             latitude: e.latitude,
             longitude: e.longitude
           });
+          markerList.push(makeMarker(e.latitude, e.longitude));
           setInfoFlag(false);
         }}
         useTextureView
       >
-        {/* 얘도 결국 제거해야 하는데... 첫 화면 문제 */}
-        {makeMarker(localInfo.latitude, localInfo.longitude)}
-        {/* error가 뜨는 것을 방지, 에러는 떠도 동작에 문제는 없음 */}
-        {locationArray.map(location => (makeMarker(location.latitude, location.longitude)))}
+        {markerList.map(marker => marker)}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
