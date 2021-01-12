@@ -12,12 +12,6 @@ import {
   TouchableOpacity
 } from "react-native";
 
-/* TODO ::
-    추가와 삭제 기능이 구현은 되어 있으나 제대로 동작하지 않는다.
-    markerList에 저장하는 객체의 형태를 변경 -> 구조 수정
-    makeMarker 렌더링 하는 방법을 개선해야 한다. -> 현재 무조건 뜨게 되어 있음.
-*/
-
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
 import { getCenter } from "./common/common";
 
@@ -26,8 +20,7 @@ import { getCenter } from "./common/common";
   `{
     idx,
     latitude,
-    longitude,
-    marker
+    longitude
   }`
  */
 const markerList = [];
@@ -75,15 +68,15 @@ const MapViewScreen = ({ navigation }) => {
             let detailAddr = "";
             if (addition0 != "") {
               if (landRaodNum2 != "") {
-                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
+                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
               } else {
-                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}`;
+                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
               }
             } else {
               if (landRaodNum2 != "") {
-                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
+                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
               } else {
-                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}`;
+                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
               }
             }
 
@@ -198,7 +191,6 @@ const MapViewScreen = ({ navigation }) => {
           setInfoFlag(false);
         }}
         onMapClick={e => {
-          // markerflag로 초기 마커를 찍고, add 눌렀을 때 마커를 추가하도록
           setLocalInfo({
             latitude: e.latitude,
             longitude: e.longitude
@@ -261,7 +253,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10
   },
-  infoItemStyle: {
+  infoItemStyle: { // TODO :: 위치 수정 필요
     flexDirection: "row",
     bottom: "20%",
     alignSelf: "center",
