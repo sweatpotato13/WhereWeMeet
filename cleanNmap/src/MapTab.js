@@ -24,6 +24,7 @@ import { getCenter } from "./common/common";
 /* NOTICE :: 
   makrerList에 저장되는 데이터 형태
   `{
+    idx,
     latitude,
     longitude,
     marker
@@ -42,12 +43,14 @@ const MapViewScreen = ({ navigation }) => {
   });
   const [markerFlag, setMarkerFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState("");
+  // state를 추가, 마커 정보의 위치를 저장해서 alert, infoItem 등에서 사용할 수 있도록
   const [infoFlag, setInfoFlag] = useState(false);
 
-  const makeMarker = (latitude, longitude) => {
+  const makeMarker = (latitude, longitude, len) => {
     return (
       <Marker
         coordinate={{ latitude, longitude }}
+        key={len}
         title="해당 영역의 주소"
         description="장소 세부 정보"
         onClick={async () => {
@@ -142,10 +145,11 @@ const MapViewScreen = ({ navigation }) => {
                 }
               }
               if (!isExist) {
+                console.log(len);
                 markerList.push({
                   latitude: localInfo.latitude,
                   longitude: localInfo.longitude,
-                  marker: makeMarker(localInfo.latitude, localInfo.longitude)
+                  marker: makeMarker(localInfo.latitude, localInfo.longitude, len)
                 });
               }
             }}
@@ -203,8 +207,9 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
-        {markerFlag ? makeMarker(localInfo.latitude, localInfo.longitude) : <></>}
+        {/* ISSUE :: 마커가 추가된 이후에 다시 클릭이 되지 않는 문제 발생 */}
         {markerList.map(marker => marker.marker)}
+        {markerFlag ? makeMarker(localInfo.latitude, localInfo.longitude) : <></>}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
