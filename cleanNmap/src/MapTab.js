@@ -43,14 +43,13 @@ const MapViewScreen = ({ navigation }) => {
   });
   const [markerFlag, setMarkerFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState("");
-  // state를 추가, 마커 정보의 위치를 저장해서 alert, infoItem 등에서 사용할 수 있도록
   const [infoFlag, setInfoFlag] = useState(false);
 
-  const makeMarker = (latitude, longitude, len) => {
+  const makeMarker = (latitude, longitude, idx) => {
     return (
       <Marker
         coordinate={{ latitude, longitude }}
-        key={len}
+        key={idx}
         title="해당 영역의 주소"
         description="장소 세부 정보"
         onClick={async () => {
@@ -111,6 +110,7 @@ const MapViewScreen = ({ navigation }) => {
             const addr_y = Number(result[0]["y"]);
             console.warn(`latitude : ${addr_x}, longitude : ${addr_y}`);
             setLocalInfo({ latitude: addr_y, longitude: addr_x });
+            setMarkerFlag(true);
             makeMarker(addr_y, addr_x);
           } else {
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
@@ -147,9 +147,9 @@ const MapViewScreen = ({ navigation }) => {
               if (!isExist) {
                 console.log(len);
                 markerList.push({
+                  idx: len,
                   latitude: localInfo.latitude,
                   longitude: localInfo.longitude,
-                  marker: makeMarker(localInfo.latitude, localInfo.longitude, len)
                 });
               }
             }}
@@ -160,6 +160,7 @@ const MapViewScreen = ({ navigation }) => {
               Alert.alert(`${addrInfo}`, '제거합니다.');
               const len = markerList.length;
               let idx = -1;
+              // TODO :: markerList의 idx 값을 활용하여 삭제할 수 있도록 수정
               for (let i = 0; i < len; i++) {
                 console.log(`${i + 1} marker locainfo : ${markerList[i].latitude}, ${markerList[i].longitude}`);
                 console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
@@ -207,9 +208,8 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
-        {/* ISSUE :: 마커가 추가된 이후에 다시 클릭이 되지 않는 문제 발생 */}
-        {markerList.map(marker => marker.marker)}
         {markerFlag ? makeMarker(localInfo.latitude, localInfo.longitude) : <></>}
+        {markerList.map(location => makeMarker(location.latitude, location.longitude, location.idx))}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
