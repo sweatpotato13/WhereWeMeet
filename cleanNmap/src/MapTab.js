@@ -13,7 +13,7 @@ import {
 } from "react-native";
 
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
-import { getCenter } from "./common/common";
+import { getCenter, getLinefromCenter } from "./common/common";
 
 /* NOTICE :: 
   makrerList에 저장되는 데이터 형태
@@ -124,7 +124,7 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Add"
             onPress={() => {
-              Alert.alert(`${addrInfo}`, '추가됨');
+              Alert.alert(`${addrInfo}`, "추가됨");
               const len = markerList.length;
               let isExist = false;
               for (let i = 0; i < len; i++) {
@@ -142,7 +142,7 @@ const MapViewScreen = ({ navigation }) => {
                 markerList.push({
                   idx: len,
                   latitude: localInfo.latitude,
-                  longitude: localInfo.longitude,
+                  longitude: localInfo.longitude
                 });
               }
             }}
@@ -150,13 +150,19 @@ const MapViewScreen = ({ navigation }) => {
           <Button
             title="Remove"
             onPress={() => {
-              Alert.alert(`${addrInfo}`, '제거합니다.');
+              Alert.alert(`${addrInfo}`, "제거합니다.");
               const len = markerList.length;
               let idx = -1;
               // TODO :: markerList의 idx 값을 활용하여 삭제할 수 있도록 수정
               for (let i = 0; i < len; i++) {
-                console.log(`${i + 1} marker locainfo : ${markerList[i].latitude}, ${markerList[i].longitude}`);
-                console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
+                console.log(
+                  `${i + 1} marker locainfo : ${markerList[i].latitude}, ${
+                    markerList[i].longitude
+                  }`
+                );
+                console.log(
+                  `current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`
+                );
                 if (
                   markerList[i].latitude === localInfo.latitude &&
                   markerList[i].longitude === localInfo.longitude
@@ -200,8 +206,15 @@ const MapViewScreen = ({ navigation }) => {
         }}
         useTextureView
       >
-        {markerFlag ? makeMarker(localInfo.latitude, localInfo.longitude) : <></>}
-        {markerList.map(location => makeMarker(location.latitude, location.longitude, location.idx))}
+        {markerFlag ? (
+          makeMarker(localInfo.latitude, localInfo.longitude)
+        ) : (
+          <></>
+        )}
+        {markerList.map(location =>
+          makeMarker(location.latitude, location.longitude, location.idx)
+        )}
+        {getLinefromCenter(markerList)}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
@@ -253,7 +266,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10
   },
-  infoItemStyle: { // TODO :: 위치 수정 필요
+  infoItemStyle: {
+    // TODO :: 위치 수정 필요
     flexDirection: "row",
     bottom: "20%",
     alignSelf: "center",
