@@ -138,7 +138,6 @@ const MapViewScreen = ({ navigation }) => {
                 }
               }
               if (!isExist) {
-                console.log(len);
                 markerList.push({
                   idx: len,
                   latitude: localInfo.latitude,
@@ -152,30 +151,24 @@ const MapViewScreen = ({ navigation }) => {
             onPress={() => {
               Alert.alert(`${addrInfo}`, "제거합니다.");
               const len = markerList.length;
-              let idx = -1;
-              // TODO :: markerList의 idx 값을 활용하여 삭제할 수 있도록 수정
+              let id = -1;
               for (let i = 0; i < len; i++) {
-                console.log(
-                  `${i + 1} marker locainfo : ${markerList[i].latitude}, ${
-                    markerList[i].longitude
-                  }`
-                );
-                console.log(
-                  `current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`
-                );
                 if (
                   markerList[i].latitude === localInfo.latitude &&
                   markerList[i].longitude === localInfo.longitude
                 ) {
-                  idx = i;
+                  id = markerList[i]['idx'];
                   break;
                 }
               }
 
-              if (idx != -1) {
-                // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
-                //          이 부분에 대한 문제 해결이 필요함.
-                markerList.splice(0, idx).concat(idx + 1, len);
+              // TODO :: 렌더링이 바로 안되는 문제 + 로직이 깔끔하지 못하다.
+              for (let j = 0; j < len; j++) {
+                if(j === id) {
+                  markerList.splice(id, 1);
+                } else if(j > id) {
+                  markerList[j - 1].idx -= 1;
+                }
               }
             }}
           />
