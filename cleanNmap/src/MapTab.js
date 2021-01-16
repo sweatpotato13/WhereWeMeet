@@ -12,15 +12,18 @@ import {
   TouchableOpacity
 } from "react-native";
 
-/* TODO ::
-    추가와 삭제 기능이 구현은 되어 있으나 제대로 동작하지 않는다.
-    locationArray에 저장하는 객체의 형태를 변경 -> 구조 수정
-    makeMarker 렌더링 하는 방법을 개선해야 한다. -> 현재 무조건 뜨게 되어 있음.
-*/
-
 import { getGeoObj, getReverseGeoObj } from "./common/geo";
 import { getCenter } from "./common/common";
-const locationArray = [];
+
+/* NOTICE :: 
+  makrerList에 저장되는 데이터 형태
+  `{
+    idx,
+    latitude,
+    longitude
+  }`
+ */
+const markerList = [];
 
 const MapViewScreen = ({ navigation }) => {
   useEffect(() => {
@@ -31,27 +34,25 @@ const MapViewScreen = ({ navigation }) => {
     latitude: 37.5665,
     longitude: 126.87905
   });
+  const [markerFlag, setMarkerFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
 
-  // 마커 띄울 때 해당 정보 창도 같이 뜰 수 있게
-  const makeMarker = (latitude, longitude) => {
+  const makeMarker = (latitude, longitude, idx) => {
     return (
       <Marker
         coordinate={{ latitude, longitude }}
+        key={idx}
         title="해당 영역의 주소"
         description="장소 세부 정보"
-        onClick={async () => { // DISCUSS :: marker를 클릭하면 바로 뜨게 해야하나 인포 정보가?
-          // 도로명 주소가 가장 상세 주소를 알 수 있음
+        onClick={async () => {
           const reverseGeoObj = await getReverseGeoObj(longitude, latitude);
           const addr = reverseGeoObj[2];
           const roadAddr = reverseGeoObj[3];
 
           if (typeof roadAddr == "undefined") {
-            // 올바르지 못한 주소일 경우
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
           } else {
-            // 올바른 주소일 경우
             const area1 = roadAddr["region"]["area1"]["name"]; // e.g) 경기도
             const area2 = roadAddr["region"]["area2"]["name"]; // e.g) 성남시 분당구
             const area3 = roadAddr["region"]["area3"]["name"]; // e.g) 정자동
@@ -67,23 +68,22 @@ const MapViewScreen = ({ navigation }) => {
             let detailAddr = "";
             if (addition0 != "") {
               if (landRaodNum2 != "") {
-                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
+                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
               } else {
-                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}`;
+                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
               }
             } else {
               if (landRaodNum2 != "") {
-                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}-${landAddrNum2}`;
+                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
               } else {
-                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}\n${area3} ${landAddrNum1}`;
+                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
               }
             }
 
             setLocalInfo({ latitude, longitude });
             setAddrInfo(detailAddr);
             setInfoFlag(!infoFlag);
-            console.log(locationArray);
-            console.log(getCenter(locationArray));
+            console.log(getCenter(markerList));
           }
         }}
       />
@@ -103,6 +103,7 @@ const MapViewScreen = ({ navigation }) => {
             const addr_y = Number(result[0]["y"]);
             console.warn(`latitude : ${addr_x}, longitude : ${addr_y}`);
             setLocalInfo({ latitude: addr_y, longitude: addr_x });
+            setMarkerFlag(true);
             makeMarker(addr_y, addr_x);
           } else {
             Alert.alert("주소 오류", "해당 주소에 대한 정보가 없습니다.");
@@ -124,12 +125,12 @@ const MapViewScreen = ({ navigation }) => {
             title="Add"
             onPress={() => {
               Alert.alert(`${addrInfo}`, '추가됨');
-              const len = locationArray.length;
+              const len = markerList.length;
               let isExist = false;
               for (let i = 0; i < len; i++) {
                 if (
-                  locationArray[i].latitude == localInfo.latitude &&
-                  locationArray[i].longitude == localInfo.longitude
+                  markerList[i].latitude == localInfo.latitude &&
+                  markerList[i].longitude == localInfo.longitude
                 ) {
                   isExist = true;
                   console.log("Already Exist");
@@ -137,9 +138,10 @@ const MapViewScreen = ({ navigation }) => {
                 }
               }
               if (!isExist) {
-                locationArray.push({
+                markerList.push({
+                  idx: len,
                   latitude: localInfo.latitude,
-                  longitude: localInfo.longitude
+                  longitude: localInfo.longitude,
                 });
               }
             }}
@@ -148,24 +150,27 @@ const MapViewScreen = ({ navigation }) => {
             title="Remove"
             onPress={() => {
               Alert.alert(`${addrInfo}`, '제거합니다.');
-              const len = locationArray.length;
-              let idx = -1;
+              const len = markerList.length;
+              let id = -1;
               for (let i = 0; i < len; i++) {
-                console.log(`${i + 1} marker locainfo : ${locationArray[i].latitude}, ${locationArray[i].longitude}`);
-                console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
+                // console.log(`${i + 1} marker locainfo : ${markerList[i].latitude}, ${markerList[i].longitude}`);
+                // console.log(`current locainfo : ${localInfo.latitude}, ${localInfo.longitude}`);
                 if (
-                  locationArray[i].latitude === localInfo.latitude &&
-                  locationArray[i].longitude === localInfo.longitude
+                  markerList[i].latitude === localInfo.latitude &&
+                  markerList[i].longitude === localInfo.longitude
                 ) {
-                  idx = i;
+                  id = markerList[i]['idx'];
                   break;
                 }
               }
 
-              if (idx != -1) {
-                // ISSUE :: 제거는 되는데 렌더링이 다음 마커가 진행되는 시점임.
-                //          이 부분에 대한 문제 해결이 필요함.
-                locationArray.splice(0, idx).concat(idx + 1, len);
+              // TODO :: 렌더링이 바로 안되는 문제 + 로직이 깔끔하지 못하다.
+              for (let j = 0; j < len; j++) {
+                if(j === id) {
+                  markerList.splice(id, 1);
+                } else if(j > id) {
+                  markerList[j - 1].idx -= 1;
+                }
               }
             }}
           />
@@ -191,14 +196,13 @@ const MapViewScreen = ({ navigation }) => {
             latitude: e.latitude,
             longitude: e.longitude
           });
+          setMarkerFlag(true);
           setInfoFlag(false);
         }}
         useTextureView
       >
-        {/* 얘도 결국 제거해야 하는데... 첫 화면 문제 */}
-        {makeMarker(localInfo.latitude, localInfo.longitude)}
-        {/* error가 뜨는 것을 방지, 에러는 떠도 동작에 문제는 없음 */}
-        {locationArray.map(location => (makeMarker(location.latitude, location.longitude)))}
+        {markerFlag ? makeMarker(localInfo.latitude, localInfo.longitude) : <></>}
+        {markerList.map(location => makeMarker(location.latitude, location.longitude, location.idx))}
       </NaverMapView>
       {searchBar()}
       {infoFlag ? infoItem() : <></>}
@@ -250,7 +254,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 10
   },
-  infoItemStyle: {
+  infoItemStyle: { // TODO :: 위치 수정 필요
     flexDirection: "row",
     bottom: "20%",
     alignSelf: "center",
