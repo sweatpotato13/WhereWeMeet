@@ -4,9 +4,10 @@ import { ActivityIndicator, View, Text } from "react-native";
 import { useEffect } from "react/cjs/react.development";
 
 
+// TODO :: 서버에 저장된 마커 정보를 불러온다.
 const TextScreen = () => {
   useEffect(() => {
-    fetch('http://localhost:3000')
+    fetch('http://localhost:3000/markers')
       .then((response) => response.text())
       .then((responseString) => {
         setIsLoading(false);
