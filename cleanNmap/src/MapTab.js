@@ -38,6 +38,7 @@ const MapViewScreen = ({ navigation }) => {
   const [addrInfo, setAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
 
+  // TODO :: marker 생성 시 서버에 해당 정보 전송
   const makeMarker = (latitude, longitude, idx) => {
     return (
       <Marker
