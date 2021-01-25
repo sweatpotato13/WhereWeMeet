@@ -30,10 +30,7 @@ const App = () => {
 };
 
 const HomeScreen = () => (
-  <Tab.Navigator>
-    <Tab.Screen name={"map"} component={MapViewScreen} />
-    <Tab.Screen name={"text"} component={TextScreen} />
-  </Tab.Navigator>
+  <MapViewScreen />
 );
 
 export default App;
