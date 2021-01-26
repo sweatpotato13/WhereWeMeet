@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     padding: 10
   },
   infoItemStyle: {
-    // TODO :: 위치 수정 필요
+    // TODO :: 전반적인 수정 필요
     flexDirection: "row",
     bottom: "20%",
     alignSelf: "center",
