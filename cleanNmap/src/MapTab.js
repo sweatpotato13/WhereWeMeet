@@ -65,6 +65,7 @@ const MapViewScreen = ({ navigation }) => {
             const landAddrNum1 = addr["land"]["number1"];
             const landAddrNum2 = addr["land"]["number2"];
 
+            // TODO :: state로 따로 관리 ! 분리해서
             let detailAddr = "";
             if (addition0 != "") {
               if (landRaodNum2 != "") {
@@ -119,10 +120,11 @@ const MapViewScreen = ({ navigation }) => {
   const infoItem = () => {
     return (
       <View style={styles.infoItemStyle}>
-        <Text>{addrInfo}</Text>
-        <View style="flexDirection: column">
+        <Text style={styles.infoItemTitleStyle}>{addrInfo}</Text>
+        <View style={styles.infoItemButtonViewStyle}>
           <Button
             title="Add"
+            style={styles.infoItemButtonStyle}
             onPress={() => {
               Alert.alert(`${addrInfo}`, "추가됨");
               const len = markerList.length;
@@ -148,6 +150,7 @@ const MapViewScreen = ({ navigation }) => {
           />
           <Button
             title="Remove"
+            style={styles.infoItemButtonStyle}
             onPress={() => {
               Alert.alert(`${addrInfo}`, "제거합니다.");
               const len = markerList.length;
@@ -162,7 +165,6 @@ const MapViewScreen = ({ navigation }) => {
                 }
               }
 
-              // TODO :: 렌더링이 바로 안되는 문제 + 로직이 깔끔하지 못하다.
               for (let j = 0; j < len; j++) {
                 if(j === id) {
                   markerList.splice(id, 1);
@@ -260,14 +262,38 @@ const styles = StyleSheet.create({
     padding: 10
   },
   infoItemStyle: {
-    // TODO :: 전반적인 수정 필요
     flexDirection: "row",
-    bottom: "20%",
+    bottom: "60%",
     alignSelf: "center",
     width: "80%",
-    height: "15%",
+    height: "14%",
     backgroundColor: "white",
+    borderRadius: 10,
     padding: 5
+  },
+  infoItemTitleStyle: {
+    position: "absolute",
+    textAlign: "center",
+    
+    top: "10%",
+    padding : 5,
+    flexDirection: "column"
+  },
+  infoItemDetailStyle: {
+    position: "absolute",
+    alignSelf: "center",
+    flexDirection: "column"
+  },
+  infoItemButtonViewStyle: {
+    position: "absolute",
+    flexDirection: "row",
+    top: "50%",
+    alignSelf: "flex-end"
+  },
+  infoItemButtonStyle: {
+    // position: "absolute",
+    // flexDirection: "column",
+    bottom: "50%"
   }
 });
 
