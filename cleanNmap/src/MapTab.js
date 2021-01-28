@@ -274,7 +274,6 @@ const styles = StyleSheet.create({
   infoItemTitleStyle: {
     position: "absolute",
     textAlign: "center",
-    
     top: "10%",
     padding : 5,
     flexDirection: "column"
@@ -287,13 +286,16 @@ const styles = StyleSheet.create({
   infoItemButtonViewStyle: {
     position: "absolute",
     flexDirection: "row",
-    top: "50%",
-    alignSelf: "flex-end"
+    alignItems: "center",
+    justifyContent: "space-around",
+    right: "34%",
+    bottom: "15%",
   },
   infoItemButtonStyle: {
-    // position: "absolute",
-    // flexDirection: "column",
-    bottom: "50%"
+    // alignContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
+    // bottom: "50%"
   }
 });
 
