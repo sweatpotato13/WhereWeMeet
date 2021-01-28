@@ -36,6 +36,8 @@ const MapViewScreen = ({ navigation }) => {
   });
   const [markerFlag, setMarkerFlag] = useState(false);
   const [addrInfo, setAddrInfo] = useState("");
+  const [specificPlaceName, setSpecificPlaceName] = useState("");
+  const [detailAddrInfo, setDetailAddrInfo] = useState("");
   const [infoFlag, setInfoFlag] = useState(false);
 
   const makeMarker = (latitude, longitude, idx) => {
@@ -65,25 +67,29 @@ const MapViewScreen = ({ navigation }) => {
             const landAddrNum1 = addr["land"]["number1"];
             const landAddrNum2 = addr["land"]["number2"];
 
-            // TODO :: state로 따로 관리 ! 분리해서
-            let detailAddr = "";
+            let specificName = "";
+            let detailName = "";
             if (addition0 != "") {
+              specificName = addition0;
               if (landRaodNum2 != "") {
-                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
+                detailName = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
               } else {
-                detailAddr = `${addition0}\n${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
+                detailName = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
               }
             } else {
+              specificName = "특정 장소명이 존재하지 않습니다.";
               if (landRaodNum2 != "") {
-                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
+                detailName = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1}-${landAddrNum2})`;
               } else {
-                detailAddr = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
+                detailName = `${area1} ${area2} ${area3} ${area4} ${landRoad} ${landRoadNum1} ${landRaodNum2}(${area3} ${landAddrNum1})`;
               }
             }
 
             setLocalInfo({ latitude, longitude });
-            setAddrInfo(detailAddr);
+            setAddrInfo(specificName + detailName);
             setInfoFlag(!infoFlag);
+            setSpecificPlaceName(specificName);
+            setDetailAddrInfo(detailName);
             console.log(getCenter(markerList));
           }
         }}
@@ -120,13 +126,13 @@ const MapViewScreen = ({ navigation }) => {
   const infoItem = () => {
     return (
       <View style={styles.infoItemStyle}>
-        <Text style={styles.infoItemTitleStyle}>{addrInfo}</Text>
+        <Text style={styles.infoItemTitleStyle}>{specificPlaceName}</Text>
+        <Text style={styles.infoItemDetailStyle}>{detailAddrInfo}</Text>
         <View style={styles.infoItemButtonViewStyle}>
           <Button
             title="Add"
-            style={styles.infoItemButtonStyle}
             onPress={() => {
-              Alert.alert(`${addrInfo}`, "추가됨");
+              Alert.alert(`${specificPlaceName} 추가됨`, `${detailAddrInfo}`);
               const len = markerList.length;
               let isExist = false;
               for (let i = 0; i < len; i++) {
@@ -150,9 +156,8 @@ const MapViewScreen = ({ navigation }) => {
           />
           <Button
             title="Remove"
-            style={styles.infoItemButtonStyle}
             onPress={() => {
-              Alert.alert(`${addrInfo}`, "제거합니다.");
+              Alert.alert(`${specificPlaceName} 제거됨`, `${detailAddrInfo}`);
               const len = markerList.length;
               let id = -1;
               for (let i = 0; i < len; i++) {
@@ -262,8 +267,8 @@ const styles = StyleSheet.create({
     padding: 10
   },
   infoItemStyle: {
-    flexDirection: "row",
-    bottom: "60%",
+    flexDirection: "column",
+    bottom: "32%",
     alignSelf: "center",
     width: "80%",
     height: "14%",
@@ -272,31 +277,22 @@ const styles = StyleSheet.create({
     padding: 5
   },
   infoItemTitleStyle: {
-    position: "absolute",
     textAlign: "center",
-    top: "10%",
-    padding : 5,
-    flexDirection: "column"
+    fontWeight: "bold",
+    fontSize: 20,
+    justifyContent: "center",
+    top: "5%",
+    margin : 5,
   },
   infoItemDetailStyle: {
-    position: "absolute",
-    alignSelf: "center",
-    flexDirection: "column"
+    textAlign: "center",
+    // margin: 5,
   },
   infoItemButtonViewStyle: {
-    position: "absolute",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    right: "34%",
-    bottom: "15%",
   },
-  infoItemButtonStyle: {
-    // alignContent: "center",
-    // alignItems: "center",
-    // justifyContent: "center",
-    // bottom: "50%"
-  }
 });
 
 export default MapViewScreen;
