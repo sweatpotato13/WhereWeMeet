@@ -19,7 +19,7 @@ npm run android
 npm run ios
 ```
 
-## Server
+## Server(Deprecated)
 
 Need to install Nest.js first
 `npm i -g @nestjs/cli`
