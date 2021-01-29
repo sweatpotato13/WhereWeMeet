@@ -12,7 +12,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import TextScreen from "./TextTab";
 import MapViewScreen from "./MapTab";
 
 const Tab = createBottomTabNavigator();
@@ -30,10 +29,7 @@ const App = () => {
 };
 
 const HomeScreen = () => (
-  <Tab.Navigator>
-    <Tab.Screen name={"map"} component={MapViewScreen} />
-    <Tab.Screen name={"text"} component={TextScreen} />
-  </Tab.Navigator>
+  <MapViewScreen />
 );
 
 export default App;
