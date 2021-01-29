@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* cleanNmapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cleanNmapTests.m */; };
+		04A6A81925C37DC400F6A012 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A6A81825C37DC400F6A012 /* SplashScreen.storyboard */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -15,11 +16,11 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* cleanNmapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cleanNmapTests.m */; };
-		51476DF9428B69922E5B9DD5 /* libPods-cleanNmap-cleanNmapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2206053070FB39FDABEB939A /* libPods-cleanNmap-cleanNmapTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		BF21E0A97CAC8317A2006471 /* libPods-cleanNmap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4F4A88F9660EFB45AFBD7EF /* libPods-cleanNmap.a */; };
-		CC21A3399E67564BBC8669CC /* libPods-cleanNmap-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE88161066F9FDDAF61642E7 /* libPods-cleanNmap-tvOSTests.a */; };
-		D6AC2B5F2ECDB3D08903A7BC /* libPods-cleanNmap-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EC97DB5BCA0DB35E7C6C364 /* libPods-cleanNmap-tvOS.a */; };
+		A8C7D3A387E38515C92E7D10 /* libPods-cleanNmap-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 09E21EDC7F6D7C5544F98214 /* libPods-cleanNmap-tvOS.a */; };
+		B9EF7A7CCC90E159AEA3526B /* libPods-cleanNmap-cleanNmapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11DA4871E4F487CE18A215CE /* libPods-cleanNmap-cleanNmapTests.a */; };
+		CDC10049D59D9FAF8614E3F8 /* libPods-cleanNmap-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AE7944DF6EA86A6FA8B28C1 /* libPods-cleanNmap-tvOSTests.a */; };
+		EF8ECF195A30DF55A93D984D /* libPods-cleanNmap.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FC67F0C4171C0E68398D8FA /* libPods-cleanNmap.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,30 +42,31 @@
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
-		009047DE7C265AD73F07D72C /* Pods-cleanNmap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap/Pods-cleanNmap.release.xcconfig"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* cleanNmapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = cleanNmapTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* cleanNmapTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cleanNmapTests.m; sourceTree = "<group>"; };
-		01711E1A5DE47BB2B61F599E /* Pods-cleanNmap-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOS/Pods-cleanNmap-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		04A6A81825C37DC400F6A012 /* SplashScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SplashScreen.storyboard; sourceTree = "<group>"; };
+		09E21EDC7F6D7C5544F98214 /* libPods-cleanNmap-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		11DA4871E4F487CE18A215CE /* libPods-cleanNmap-cleanNmapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap-cleanNmapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* cleanNmap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cleanNmap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = cleanNmap/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = cleanNmap/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = cleanNmap/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = cleanNmap/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = cleanNmap/main.m; sourceTree = "<group>"; };
-		1EC97DB5BCA0DB35E7C6C364 /* libPods-cleanNmap-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2206053070FB39FDABEB939A /* libPods-cleanNmap-cleanNmapTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap-cleanNmapTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* cleanNmap-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cleanNmap-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* cleanNmap-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cleanNmap-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FC67F0C4171C0E68398D8FA /* libPods-cleanNmap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F43CA1D104888D4C020CED4 /* Pods-cleanNmap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap/Pods-cleanNmap.debug.xcconfig"; sourceTree = "<group>"; };
+		6AE7944DF6EA86A6FA8B28C1 /* libPods-cleanNmap-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E0723A30EE0D9C30B33914 /* Pods-cleanNmap-cleanNmapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-cleanNmapTests.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = cleanNmap/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		826AA4EE4967DA09BBA5077D /* Pods-cleanNmap-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOSTests/Pods-cleanNmap-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		849562B848599A36F4653B6E /* Pods-cleanNmap-cleanNmapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-cleanNmapTests.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests.release.xcconfig"; sourceTree = "<group>"; };
-		9076E20D21DCF3B44ACEC9C6 /* Pods-cleanNmap-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOS.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOS/Pods-cleanNmap-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		A24EB6A221BE134FDB7A745E /* Pods-cleanNmap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap/Pods-cleanNmap.debug.xcconfig"; sourceTree = "<group>"; };
-		B60A019F3C9A67E60A8EE35E /* Pods-cleanNmap-cleanNmapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-cleanNmapTests.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CE88161066F9FDDAF61642E7 /* libPods-cleanNmap-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D4F4A88F9660EFB45AFBD7EF /* libPods-cleanNmap.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cleanNmap.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA1B81778E3A1F522074E025 /* Pods-cleanNmap-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOSTests/Pods-cleanNmap-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		94B52F7848CB95DD869BBE66 /* Pods-cleanNmap-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOS/Pods-cleanNmap-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B26318A65CA7976C18A76AF0 /* Pods-cleanNmap-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOSTests/Pods-cleanNmap-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C561ECC8ABFE256C3ABCCB9D /* Pods-cleanNmap-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOSTests/Pods-cleanNmap-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		C59270131619B728F860E40B /* Pods-cleanNmap-cleanNmapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-cleanNmapTests.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests.release.xcconfig"; sourceTree = "<group>"; };
+		C8E34A0929513B4F89BB6792 /* Pods-cleanNmap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap/Pods-cleanNmap.release.xcconfig"; sourceTree = "<group>"; };
+		E88296A456CA37CC0C6AFB7F /* Pods-cleanNmap-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cleanNmap-tvOS.release.xcconfig"; path = "Target Support Files/Pods-cleanNmap-tvOS/Pods-cleanNmap-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51476DF9428B69922E5B9DD5 /* libPods-cleanNmap-cleanNmapTests.a in Frameworks */,
+				B9EF7A7CCC90E159AEA3526B /* libPods-cleanNmap-cleanNmapTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF21E0A97CAC8317A2006471 /* libPods-cleanNmap.a in Frameworks */,
+				EF8ECF195A30DF55A93D984D /* libPods-cleanNmap.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6AC2B5F2ECDB3D08903A7BC /* libPods-cleanNmap-tvOS.a in Frameworks */,
+				A8C7D3A387E38515C92E7D10 /* libPods-cleanNmap-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CC21A3399E67564BBC8669CC /* libPods-cleanNmap-tvOSTests.a in Frameworks */,
+				CDC10049D59D9FAF8614E3F8 /* libPods-cleanNmap-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,8 +134,24 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				04A6A81825C37DC400F6A012 /* SplashScreen.storyboard */,
 			);
 			name = cleanNmap;
+			sourceTree = "<group>";
+		};
+		172FA4603CE42A181BEBA4CC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F43CA1D104888D4C020CED4 /* Pods-cleanNmap.debug.xcconfig */,
+				C8E34A0929513B4F89BB6792 /* Pods-cleanNmap.release.xcconfig */,
+				75E0723A30EE0D9C30B33914 /* Pods-cleanNmap-cleanNmapTests.debug.xcconfig */,
+				C59270131619B728F860E40B /* Pods-cleanNmap-cleanNmapTests.release.xcconfig */,
+				94B52F7848CB95DD869BBE66 /* Pods-cleanNmap-tvOS.debug.xcconfig */,
+				E88296A456CA37CC0C6AFB7F /* Pods-cleanNmap-tvOS.release.xcconfig */,
+				B26318A65CA7976C18A76AF0 /* Pods-cleanNmap-tvOSTests.debug.xcconfig */,
+				C561ECC8ABFE256C3ABCCB9D /* Pods-cleanNmap-tvOSTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -141,28 +159,12 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				D4F4A88F9660EFB45AFBD7EF /* libPods-cleanNmap.a */,
-				2206053070FB39FDABEB939A /* libPods-cleanNmap-cleanNmapTests.a */,
-				1EC97DB5BCA0DB35E7C6C364 /* libPods-cleanNmap-tvOS.a */,
-				CE88161066F9FDDAF61642E7 /* libPods-cleanNmap-tvOSTests.a */,
+				4FC67F0C4171C0E68398D8FA /* libPods-cleanNmap.a */,
+				11DA4871E4F487CE18A215CE /* libPods-cleanNmap-cleanNmapTests.a */,
+				09E21EDC7F6D7C5544F98214 /* libPods-cleanNmap-tvOS.a */,
+				6AE7944DF6EA86A6FA8B28C1 /* libPods-cleanNmap-tvOSTests.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		72891EEE0544A26E5BC7A493 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A24EB6A221BE134FDB7A745E /* Pods-cleanNmap.debug.xcconfig */,
-				009047DE7C265AD73F07D72C /* Pods-cleanNmap.release.xcconfig */,
-				B60A019F3C9A67E60A8EE35E /* Pods-cleanNmap-cleanNmapTests.debug.xcconfig */,
-				849562B848599A36F4653B6E /* Pods-cleanNmap-cleanNmapTests.release.xcconfig */,
-				01711E1A5DE47BB2B61F599E /* Pods-cleanNmap-tvOS.debug.xcconfig */,
-				9076E20D21DCF3B44ACEC9C6 /* Pods-cleanNmap-tvOS.release.xcconfig */,
-				826AA4EE4967DA09BBA5077D /* Pods-cleanNmap-tvOSTests.debug.xcconfig */,
-				DA1B81778E3A1F522074E025 /* Pods-cleanNmap-tvOSTests.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -180,7 +182,7 @@
 				00E356EF1AD99517003FC87E /* cleanNmapTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				72891EEE0544A26E5BC7A493 /* Pods */,
+				172FA4603CE42A181BEBA4CC /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -205,12 +207,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "cleanNmapTests" */;
 			buildPhases = (
-				379CFF465D2E85811D64D486 /* [CP] Check Pods Manifest.lock */,
+				C84DB3510CBA9D19C1C2B4F6 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				0E1A75148C3CF145A9B37191 /* [CP] Copy Pods Resources */,
-				B3C5D751E2484A558EB75EBF /* [CP] Embed Pods Frameworks */,
+				565BD63FCA7E5C01DFE0D6E6 /* [CP] Embed Pods Frameworks */,
+				799E341B872CDAF320B5F531 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -226,14 +228,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "cleanNmap" */;
 			buildPhases = (
-				454862DD41376F6CAD46F8C2 /* [CP] Check Pods Manifest.lock */,
+				40876067D3EC5713626954A7 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				D3A20858CABC3EF786623F23 /* [CP] Copy Pods Resources */,
-				3204009C5CD60EE990100536 /* [CP] Embed Pods Frameworks */,
+				A2DB57DE8D02A6232292CBEB /* [CP] Embed Pods Frameworks */,
+				413C6B4FE8ECBD86B2602E43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,7 +250,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "cleanNmap-tvOS" */;
 			buildPhases = (
-				AA81195A065BF35CDEE4F899 /* [CP] Check Pods Manifest.lock */,
+				113CDBEA4555D943C0CE2F86 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -268,7 +270,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "cleanNmap-tvOSTests" */;
 			buildPhases = (
-				C0BD2664ABC541AE91E85E07 /* [CP] Check Pods Manifest.lock */,
+				6AE583140337F11D2F92F626 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -343,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				04A6A81925C37DC400F6A012 /* SplashScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,101 +382,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		0E1A75148C3CF145A9B37191 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native Code And Images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		3204009C5CD60EE990100536 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-frameworks.sh",
-				"${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMapsMap.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		379CFF465D2E85811D64D486 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-cleanNmap-cleanNmapTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		454862DD41376F6CAD46F8C2 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-cleanNmap-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AA81195A065BF35CDEE4F899 /* [CP] Check Pods Manifest.lock */ = {
+		113CDBEA4555D943C0CE2F86 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -495,7 +404,61 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B3C5D751E2484A558EB75EBF /* [CP] Embed Pods Frameworks */ = {
+		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native Code And Images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		40876067D3EC5713626954A7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cleanNmap-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		413C6B4FE8ECBD86B2602E43 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		565BD63FCA7E5C01DFE0D6E6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -513,7 +476,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C0BD2664ABC541AE91E85E07 /* [CP] Check Pods Manifest.lock */ = {
+		6AE583140337F11D2F92F626 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -535,13 +498,13 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D3A20858CABC3EF786623F23 /* [CP] Copy Pods Resources */ = {
+		799E341B872CDAF320B5F531 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -550,7 +513,47 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap-cleanNmapTests/Pods-cleanNmap-cleanNmapTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2DB57DE8D02A6232292CBEB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-frameworks.sh",
+				"${PODS_ROOT}/NMapsMap/framework/NMapsMap.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NMapsMap.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cleanNmap/Pods-cleanNmap-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C84DB3510CBA9D19C1C2B4F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cleanNmap-cleanNmapTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -646,7 +649,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B60A019F3C9A67E60A8EE35E /* Pods-cleanNmap-cleanNmapTests.debug.xcconfig */;
+			baseConfigurationReference = 75E0723A30EE0D9C30B33914 /* Pods-cleanNmap-cleanNmapTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -669,7 +672,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 849562B848599A36F4653B6E /* Pods-cleanNmap-cleanNmapTests.release.xcconfig */;
+			baseConfigurationReference = C59270131619B728F860E40B /* Pods-cleanNmap-cleanNmapTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -689,7 +692,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A24EB6A221BE134FDB7A745E /* Pods-cleanNmap.debug.xcconfig */;
+			baseConfigurationReference = 5F43CA1D104888D4C020CED4 /* Pods-cleanNmap.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -712,7 +715,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 009047DE7C265AD73F07D72C /* Pods-cleanNmap.release.xcconfig */;
+			baseConfigurationReference = C8E34A0929513B4F89BB6792 /* Pods-cleanNmap.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -733,7 +736,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01711E1A5DE47BB2B61F599E /* Pods-cleanNmap-tvOS.debug.xcconfig */;
+			baseConfigurationReference = 94B52F7848CB95DD869BBE66 /* Pods-cleanNmap-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -761,7 +764,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9076E20D21DCF3B44ACEC9C6 /* Pods-cleanNmap-tvOS.release.xcconfig */;
+			baseConfigurationReference = E88296A456CA37CC0C6AFB7F /* Pods-cleanNmap-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -789,7 +792,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 826AA4EE4967DA09BBA5077D /* Pods-cleanNmap-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = B26318A65CA7976C18A76AF0 /* Pods-cleanNmap-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -816,7 +819,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA1B81778E3A1F522074E025 /* Pods-cleanNmap-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = C561ECC8ABFE256C3ABCCB9D /* Pods-cleanNmap-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
