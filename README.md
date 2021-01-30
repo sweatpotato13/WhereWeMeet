@@ -18,20 +18,3 @@ npm run android
 // if you want to run ios
 npm run ios
 ```
-
-## Server(Deprecated)
-
-Need to install Nest.js first
-`npm i -g @nestjs/cli`
-
-### Install
-```
-// in root dir
-npm install
-```
-
-### Run
-```
-// in server dir
-npm run start
-```
