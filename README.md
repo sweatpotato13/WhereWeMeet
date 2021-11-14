@@ -8,13 +8,17 @@
 > Toy project using `React Native` and `NaverMap API`
 
 ## Contents
-1. [Technical Stack](#Stack)
-2. [How to Run](#How-to-run)
-3. [Features](#Features)
-   1. [Search address](#1-Search-address)
-   2. [Markers](#2-Markers)
-   3. [Find intermediate point](#3-Find-intermediate-point)
-   4. [API information](#4-API-information)
+- [WhereWeMeet](#wherewemeet)
+  - [Contents](#contents)
+  - [Stack](#stack)
+  - [How to run](#how-to-run)
+    - [Install](#install)
+    - [Run](#run)
+  - [Features](#features)
+    - [1. Search address](#1-search-address)
+    - [2. Markers](#2-markers)
+    - [3. Find intermediate point](#3-find-intermediate-point)
+    - [4. API information](#4-api-information)
 
 <h3 align='center'>Preview</h3>
 <p align='center'>
@@ -25,9 +29,9 @@
 <p>
   <img src="https://img.shields.io/static/v1?label=&message=ReactNative&color=61DAFB&logo=react&logoColor=FFFFFF"/>
   <img src="https://img.shields.io/static/v1?label=&message=Javascript&color=F1E05A&logo=javascript&logoColor=FFFFFF"/>
+  <img src="https://img.shields.io/static/v1?label=&message=NaverMapAPI&color=brightgreen&logo=naver&logoColor=FFFFFF"/><br/>
   <img src="https://img.shields.io/static/v1?label=&message=Android&color=brightgreen&logo=android&logoColor=FFFFFF"/>
   <img src="https://img.shields.io/static/v1?label=&message=iOS&color=orange&logo=apple&logoColor=FFFFFF"/>
-  <img src="https://img.shields.io/static/v1?label=&message=NaverMapAPI&color=brightgreen&logo=naver&logoColor=FFFFFF"/>
 </p>
 
 ## How to run
@@ -41,7 +45,7 @@ pod install
 
 ### Run
 ```
-// in react native root dir
+cd `your react native root dir`
 // if you want to run android
 npm run android
 
@@ -63,3 +67,6 @@ npm run ios
    * 찍혀있는 마커 정보를 이용해서 중간 지점 표시
 
 ### 4. API information
+   * React Native용 네이버 지도 표시 :: [repository](https://github.com/QuadFlask/react-native-naver-map)
+   * API information
+      * [GeoCode & ReverseGeoCode](https://navermaps.github.io/maps.js/docs/naver.maps.Service.html#~GeocodeResponse)
